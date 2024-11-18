@@ -138,13 +138,13 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Fecha de generación de factura     | FECDOC   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
 | Fecha de vencimiento de factura    | FECVEN   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
 | Nombre del vendedor                | NOMVEN   | Inversiones Piedra Del Sol S. A. | CHAR(255) | No completar con nada ni a la izquierda ni a la derecha. | NO     |
-| Código de moneda de la factura     | MONEDA   | COP              | CHAR(3)        | Código de la moneda.                              | SI     |
+| Código de moneda de la factura     | MONEDA   | COP              | CHAR(3)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.3 Moneda (ISO 4217): @currencyID)   | SI     |
 | Tipo de envío para notas crédito   | TIPCRU   |                  | CHAR(1)        | Aplica solo para notas crédito.                       | SI     |
 | Código sucursal o tienda           | CODSUC   |                  | CHAR(50)       | Código sucursal o tienda.                            | NO     |
 | Número de factura referenciada     | NUMREF   |                  | CHAR(40)       | Solo aplica para notas crédito de tipo F.               | SI     |
 | Código de formato de diseño        | FORIMP   |                  | CHAR(2)        | Código de formato de diseño para el PDF.          | NO     |
 | Clasificación del documento        | CLADET   |                  | CHAR(1)        | D: Detallado, U: Único.                           | NO     |
-| Formas de Pago                     | FORPAG   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.1 Formas de Pago: cbc:PaymentMeans/ID)                | SI     |
+| Formas de Pago                     | FORPAG   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.1 Formas de Pago: cbc:PaymentMeans/ID) | SI     |
 | Orden de compra                    | ORDENC   |                  | CHAR(40)       | Si requiere manejar número de orden de compra.    | NO     |
 | Número de remisión                 | NUREMI   |                  | CHAR(40)       | Si requiere manejar número de remisión.           | NO     |
 | Nota de recepción                  | NORECE   |                  | CHAR(40)       | Si requiere manejar nota de recepción.            | NO     |
@@ -157,7 +157,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Observaciones documento referenciado | OBSREF |                  | CHAR(200)      | Observaciones del documento referenciado.         | SI para notas crédito |
 | Observaciones generales            | OBSERV   |                  | CHAR(200)      | Si requiere una observación en la factura.        | NO     |
 | Texto de la factura                | TEXDOC   |                  | CHAR(950)      | Texto adicional de la factura.                    | NO     |
-| Motivo devolución DIAN             | MODEDI   |                  | CHAR(1)        | Ver tabla DIAN 6.2.5.                             | SI para notas crédito |
+| Motivo devolución DIAN             | MODEDI   |                  | CHAR(1)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.3 Documento CreditNote – Nota Crédito) | SI para notas crédito |
 | Número de entrega                  | NUMENT   |                  | CHAR(10)       | Si requiere manejar número de entrega.            | NO     |
 | Número de factura DIAN             | NDIAN    |                  | CHAR(18)       | Número de la factura para pruebas.                 | NO     |
 | Organización de ventas             | SOCIED   |                  | CHAR(40)       | Código de la organización de ventas.               | NO     |
@@ -169,8 +169,8 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Total de impuestos                 | TOTIMP   | 8781.42          | DEC(15,2)      | Multiplicación de SUBTOT por el porcentaje de impuestos. | SI     |
 | Valor total de descuentos          | TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
 | Días para realizar el pago         | DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
-| Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla DIAN 6.1.5. Tipos de operación.         | SI     |
-| Medios de Pago		     | MEDPAG 	| 40		   | ||SI|
+| Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.1 Documento Invoice – Factura electrónica)         | SI     |
+| Medios de Pago		     | MEDPAG 	| 40		   | | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.2 Medios de Pago: cbc:PaymentMeansCode)  |SI|
 | Usuario                            | USUAR    |                  | CHAR(30)       |                                                 | SI     |
 | Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
 
@@ -231,13 +231,13 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 ## Campos de Datos del Cliente (CLIDOC)
 | Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
 |------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
-| Clase persona                      | CLAPER   | 1                | CHAR(1)        | Ver tabla DIAN 6.2.3.                           | SI     |
+| Clase persona                      | CLAPER   | 1                | CHAR(1)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.3 Tipo de organización (Personas Natural y Juridica): cbc:AdditionalAccountID)   | SI     |
 | Código documento                   | CODDOC   | 31               | CHAR(2)        | Código de documento de identificación.           | SI     |
 | Número de documento                | NUMDOC   | 900496336        | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
 | Dígito de verificación             | DIVECL   | 2                | CHAR(1)        | Solo aplica si es código de documento 31.        | SI     |
-| Código país                        | PAICLI   | CO               | CHAR(2)        | CO=Colombia (ISO 3166-1).                        | SI     |
-| Departamento del cliente           | DEPCLI   | Santander        | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Ciudad del cliente                 | CIUCLI   | San Gil          | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Código país                        | PAICLI   | CO               | CHAR(2)        | CO=Colombia Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.9.1 Países (ISO 3166-1): cbc:IdentificationCode)   | SI     |
+| Departamento del cliente           | DEPCLI   | Santander        | CHAR(40)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.9.2 Departamentos (ISO 3166-2:CO): cbc:CountrySubentity, cbc:CountrySubentityCode) No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Ciudad del cliente                 | CIUCLI   | San Gil          | CHAR(40)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.9.3 Municipios: cbc:CityName) No completar con nada ni a la izquierda ni a la derecha. | SI     |
 | Barrio del cliente                 | LOCCLI   |                  | CHAR(40)       | Si requiere indicar el barrio del cliente.        | NO     |
 | Dirección del cliente              | DIRCLI   | Kilómetro 1 Vía San Gil Charalá | CHAR(200) | No completar con nada ni a la izquierda ni a la derecha. | SI |
 | Teléfono del cliente               | TELCLI   | 3208376408       | CHAR(200)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
@@ -252,7 +252,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Nombre país                        | NOMPAI   | Colombia         | CHAR(150)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
 | Código ciudad                      | CODCIU   | 68001            | CHAR(20)        | Fuente tabla DANE.                                        | SI     |
 | Código departamento                | CODDEP   | 68               | CHAR(20)        | Fuente tabla DANE.                                        | SI     |
-| Obligaciones o responsabilidades   | OBLCON   | O-09             | CHAR(200)       | Ver tabla DIAN 6.2.7.                                     | SI     |
+| Obligaciones o responsabilidades   | OBLCON   | O-09             | CHAR(200)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.6 Responsabilidades fiscales)     | SI     |
 
 
 ##### **Ejemplo de CLIDOC**
@@ -295,15 +295,15 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Consecutivo detalle documento      | IDEPOS   | 1                | INT(6)          | Número Consecutivo.                                       | SI     |
 | Código de producto                 | CODITE   | 1                | CHAR(40)        | No completar con nada ni a la izquierda ni a la derecha.  | SI     |
 | Descripción del producto           | NOMITE   | Triturado De 1/2 Menor Calidad | CHAR(255) | No completar con nada ni a la izquierda ni a la derecha.  | SI     |
-| Unidad de medida                   | UNIMED   | 94               | CHAR(5)         | Ver tabla DIAN 6.3.6.                                     | SI     |
+| Unidad de medida                   | UNIMED   | 94               | CHAR(5)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.6 Unidades de Cantidad: @unitCode)    | SI     |
 | Cantidad del producto              | CANITE   | 2.00             | DEC(8,2)        |                                                          | SI     |
 | Valor unitario del producto        | VALITE   | 23109.00         | DEC(15,2)       | Valor sin impuestos y unitario del artículo.              | SI     |
 | Valor total de los productos       | TOTVAD   | 46218.00         | DEC(15,2)       | Resultado de multiplicar VALITE * CANITE.                 | SI     |
 | Valor del impuesto                 | VALIMD   | 8781.42          | DEC(15,2)       | Resultado de multiplicar TOTVAD * PORIMD.                 | SI     |
 | Valor del descuento                | VALDED   | 0.00             | DEC(15,2)       |                                                          | NO     |
 | Porcentaje del impuesto            | PORIMD   | 19.00            | DEC(15,2)       |                                                          | SI     |
-| Código del impuesto                | CODIMD   | 01               | CHAR(2)         | Código de impuesto tabla DIAN 6.2.2.                      | SI     |
-| Nombre del impuesto                | NOMIMD   | IVA              | CHAR(255)       | Nombre del impuesto tabla DIAN 6.2.2.                     | SI     |
+| Código del impuesto                | CODIMD   | 01               | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)  | SI     |
+| Nombre del impuesto                | NOMIMD   | IVA              | CHAR(255)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)                     | SI     |
 
 ##### **Ejemplo de DETDOC**
 
@@ -365,8 +365,8 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
 |------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
 | Consecutivo impuestos documento    | IDEIMP   | 1                | INT(6)          | Número Consecutivo.                                       | SI     |
-| Código impuesto                    | CODIMP   | 01               | CHAR(2)         | Código de impuesto tabla DIAN 6.2.2.                      | SI     |
-| Nombre del impuesto                | NOMIMP   | IVA              | CHAR(255)       | Nombre del impuesto tabla DIAN 6.2.2.                     | SI     |
+| Código impuesto                    | CODIMP   | 01               | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)   | SI     |
+| Nombre del impuesto                | NOMIMP   | IVA              | CHAR(255)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)   | SI     |
 | Porcentaje impuesto                | PORIMP   | 19.00            | DEC(15,2)       |                                                          | SI     |
 | Valor del impuesto                 | VALIMP   | 8781.42          | DEC(15,2)       | Valor impuesto resultado de multiplicar BASIMP * PORIMP.  | SI     |
 | Base gravable impuesto             | BASIMP   | 46218.00         | DEC(15,2)       | Valor sobre el cual se calculan los impuestos.            | SI     |
@@ -395,7 +395,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
 | Consecutivo de descuento           | CONDES   |                  | INT(6)          | Número Consecutivo del descuento.                        | SI     |
-| Código de descuento                | CODDES   |                  | CHAR(2)         | Ver tabla DIAN 6.3.8.                                    | SI     |
+| Código de descuento                | CODDES   |                  | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.10 Tablas de tarifas por Impuesto)   | SI     |
 | Porcentaje de descuento            | PORDES   |                  | DEC(15,2)       |                                                          | SI     |
 | Valor de descuento                 | VALDES   |                  | DEC(15,2)       |                                                          | SI     |
 | Base sobre la cual se aplica el descuento | VABADE  |                  | DEC(15,2)       |                                                          | SI     |
