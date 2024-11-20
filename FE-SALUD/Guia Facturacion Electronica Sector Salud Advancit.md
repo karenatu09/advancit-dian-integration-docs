@@ -129,50 +129,67 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 
 ## Campos de la Cabecera del Documento (CABDOC)
-| Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
-|------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
-| Nit de la empresa que factura      | NITEMP   | 900225722        | CHAR(30)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Numero de resolución autorizada    | NUMRES   | 1234567891000AA  | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Tipo de documento a enviar         | TDOCU    | 01               | CHAR(2)        | 01: Facturas, 02: Notas débito, 03: Notas crédito. | SI     |
-| Numero de factura                  | NUMERO   | 15111            | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Fecha de generación de factura     | FECDOC   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Fecha de vencimiento de factura    | FECVEN   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Nombre del vendedor                | NOMVEN   | Inversiones Piedra Del Sol S. A. | CHAR(255) | No completar con nada ni a la izquierda ni a la derecha. | NO     |
-| Código de moneda de la factura     | MONEDA   | COP              | CHAR(3)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.3 Moneda (ISO 4217): @currencyID)   | SI     |
-| Tipo de envío para notas crédito   | TIPCRU   |                  | CHAR(1)        | Aplica solo para notas crédito.                       | SI     |
-| Código sucursal o tienda           | CODSUC   |                  | CHAR(50)       | Código sucursal o tienda.                            | NO     |
-| Número de factura referenciada     | NUMREF   |                  | CHAR(40)       | Solo aplica para notas crédito de tipo F.               | SI     |
-| Código de formato de diseño        | FORIMP   |                  | CHAR(2)        | Código de formato de diseño para el PDF.          | NO     |
-| Clasificación del documento        | CLADET   |                  | CHAR(1)        | D: Detallado, U: Único.                           | NO     |
-| Formas de Pago                     | FORPAG   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.1 Formas de Pago: cbc:PaymentMeans/ID) | SI     |
-| Orden de compra                    | ORDENC   |                  | CHAR(40)       | Si requiere manejar número de orden de compra.    | NO     |
-| Número de remisión                 | NUREMI   |                  | CHAR(40)       | Si requiere manejar número de remisión.           | NO     |
-| Nota de recepción                  | NORECE   |                  | CHAR(40)       | Si requiere manejar nota de recepción.            | NO     |
-| EAN tienda entrega                 | EANTIE   |                  | CHAR(40)       | Código EAN de tienda de entrega.                   | NO     |
-| Código moneda origen               | COMODE   |                  | CHAR(3)        | Código moneda de origen.                           | SI si es factura de exportación |
-| Código moneda destino              | COMOHA   |                  | CHAR(3)        | Código moneda de destino.                          | SI si es factura de exportación |
-| Factor cálculo moneda              | FACCAL   |                  | CHAR(12)       | Valor tasa de cambio de moneda extranjera.         | SI si es factura de exportación |
-| Fecha de tasa de cambio            | FETACA   |                  | CHAR(20)       | Fecha en la que se tomó la tasa de cambio.         | SI si es factura de exportación |
-| Fecha del documento referenciado   | FECREF   |                  | CHAR(20)       | Fecha en la que se generó el documento referenciado. | SI para notas crédito |
-| Observaciones documento referenciado | OBSREF |                  | CHAR(200)      | Observaciones del documento referenciado.         | SI para notas crédito |
-| Observaciones generales            | OBSERV   |                  | CHAR(200)      | Si requiere una observación en la factura.        | NO     |
-| Texto de la factura                | TEXDOC   |                  | CHAR(950)      | Texto adicional de la factura.                    | NO     |
-| Motivo devolución DIAN             | MODEDI   |                  | CHAR(1)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.3 Documento CreditNote – Nota Crédito) | SI para notas crédito |
-| Número de entrega                  | NUMENT   |                  | CHAR(10)       | Si requiere manejar número de entrega.            | NO     |
-| Número de factura DIAN             | NDIAN    |                  | CHAR(18)       | Número de la factura para pruebas.                 | NO     |
-| Organización de ventas             | SOCIED   |                  | CHAR(40)       | Código de la organización de ventas.               | NO     |
-| Código del vendedor                | CODVEN   |                  | CHAR(40)       | Si requiere código de vendedor en la factura.      | NO     |
-| Motivo de devolución               | MOTDEV   |                  | CHAR(200)      | Motivo de devolución de la nota crédito.           | NO     |
-| Subtotal del documento             | SUBTO   | 46218.00         | DEC(15,2)      | Valor sin impuestos, descuentos y anticipos.     | SI     |
-| Base para calcular impuestos       | BASIMP   | 46218.00         | DEC(15,2)      | Valor sobre el cual se calculan los impuestos.    | SI     |
-| Total a pagar                      | TOTFAC   | 54999.42         | DEC(15,2)      | Resultado de SUBTOT + TOTIMP.                   | SI     |
-| Total de impuestos                 | TOTIMP   | 8781.42          | DEC(15,2)      | Multiplicación de SUBTOT por el porcentaje de impuestos. | SI     |
-| Valor total de descuentos          | TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
-| Días para realizar el pago         | DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
-| Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.1 Documento Invoice – Factura electrónica)         | SI     |
-| Medios de Pago		     | MEDPAG 	| 40		   | | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.2 Medios de Pago: cbc:PaymentMeansCode)  |SI|
-| Usuario                            | USUAR    |                  | CHAR(30)       |                                                 | SI     |
-| Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
+| Descripción                        		| Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
+|-----------------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
+| Nit de la empresa que factura 	     	| NITEMP   | 900225722        | CHAR(30)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Numero de resolución autorizada  	  	| NUMRES   | 1234567891000AA  | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Tipo de documento a enviar         		| TDOCU    | 01               | CHAR(2)        | 01: Facturas, 02: Notas débito, 03: Notas crédito. | SI     |
+| Numero de factura                  		| NUMERO   | 15111            | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Fecha de generación de factura     		| FECDOC   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Fecha de vencimiento de factura    		| FECVEN   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Nombre del vendedor                		| NOMVEN   | Inversiones Piedra Del Sol S. A. | CHAR(255) | No completar con nada ni a la izquierda ni a la derecha. | NO     |
+| Código de moneda de la factura     		| MONEDA   | COP              | CHAR(3)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.3 Moneda (ISO 4217): @currencyID)   | SI     |
+| Tipo de envío para notas crédito   		| TIPCRU   |                  | CHAR(1)        | Aplica solo para notas crédito.                       | SI     |
+| Código sucursal o tienda           		| CODSUC   |                  | CHAR(50)       | Código sucursal o tienda.                            | NO     |
+| Número de factura referenciada     		| NUMREF   |                  | CHAR(40)       | Solo aplica para notas crédito de tipo F.               | SI     |
+| Código de formato de diseño        		| FORIMP   |                  | CHAR(2)        | Código de formato de diseño para el PDF.          | NO     |
+| Clasificación del documento        		| CLADET   |                  | CHAR(1)        | D: Detallado, U: Único.                           | NO     |
+| Formas de Pago                     		| FORPAG   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.1 Formas de Pago: cbc:PaymentMeans/ID) | SI     |
+| Orden de compra                    		| ORDENC   |                  | CHAR(40)       | Si requiere manejar número de orden de compra.    | NO     |
+| Número de remisión                 		| NUREMI   |                  | CHAR(40)       | Si requiere manejar número de remisión.           | NO     |
+| Nota de recepción                  		| NORECE   |                  | CHAR(40)       | Si requiere manejar nota de recepción.            | NO     |
+| EAN tienda entrega                 		| EANTIE   |                  | CHAR(40)       | Código EAN de tienda de entrega.                   | NO     |
+| Código moneda origen               		| COMODE   |                  | CHAR(3)        | Código moneda de origen.                           | SI si es factura de exportación |
+| Código moneda destino              		| COMOHA   |                  | CHAR(3)        | Código moneda de destino.                          | SI si es factura de exportación |
+| Factor cálculo moneda              		| FACCAL   |                  | CHAR(12)       | Valor tasa de cambio de moneda extranjera.         | SI si es factura de exportación |
+| Fecha de tasa de cambio            		| FETACA   |                  | CHAR(20)       | Fecha en la que se tomó la tasa de cambio.         | SI si es factura de exportación |
+| Fecha del documento referenciado   		| FECREF   |                  | CHAR(20)       | Fecha en la que se generó el documento referenciado. | SI para notas crédito |
+| Observaciones documento referenciado 		| OBSREF |                  | CHAR(200)      | Observaciones del documento referenciado.         | SI para notas crédito |
+| Observaciones generales            		| OBSERV   |                  | CHAR(200)      | Si requiere una observación en la factura.        | NO     |
+| Texto de la factura                		| TEXDOC   |                  | CHAR(950)      | Texto adicional de la factura.                    | NO     |
+| Motivo devolución DIAN             		| MODEDI   |                  | CHAR(1)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.3 Documento CreditNote – Nota Crédito) | SI para notas crédito |
+| Número de entrega                  		| NUMENT   |                  | CHAR(10)       | Si requiere manejar número de entrega.            | NO     |
+| Número de factura DIAN             		| NDIAN    |                  | CHAR(18)       | Número de la factura para pruebas.                 | NO     |
+| Organización de ventas             		| SOCIED   |                  | CHAR(40)       | Código de la organización de ventas.               | NO     |
+| Código del vendedor               		| CODVEN   |                  | CHAR(40)       | Si requiere código de vendedor en la factura.      | NO     |
+| Motivo de devolución               		| MOTDEV   |                  | CHAR(200)      | Motivo de devolución de la nota crédito.           | NO     |
+| Subtotal del documento             		| SUBTO   | 46218.00         | DEC(15,2)      | Valor sin impuestos, descuentos y anticipos.     | SI     |
+| Base para calcular impuestos       		| BASIMP   | 46218.00         | DEC(15,2)      | Valor sobre el cual se calculan los impuestos.    | SI     |
+| Total a pagar                      		| TOTFAC   | 54999.42         | DEC(15,2)      | Resultado de SUBTOT + TOTIMP.                   | SI     |
+| Total de impuestos                 		| TOTIMP   | 8781.42          | DEC(15,2)      | Multiplicación de SUBTOT por el porcentaje de impuestos. | SI     |
+| Valor total de descuentos          		| TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
+| Días para realizar el pago         		| DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
+| Tipo de operación                  		| TIPOPE   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.1 Documento Invoice – Factura electrónica)         | SI     |
+| Medios de Pago		     		| MEDPAG   | 40		      | | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.2 Medios de Pago: cbc:PaymentMeansCode)  |SI|
+| Usuario                            		| USUAR    |                   | CHAR(30)       |                                                 | SI     |
+| Clave						| CLAVE    |                   | CHAR(30)       |                                                 | SI     |
+| Indicador de prestación de servicios desde	| INPESD   |                   | Fecha (YYYY-MM-DD)|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
+| Indicador de prestación de servicios hasta	| INPEST   |                   | Fecha (YYYY-MM-DD)| Fecha de finalización del periodo de prestación de servicios.                                       | Sí              |
+| Indicador de periodo de la entrega	    	| INPEND   |                   | Fecha (YYYY-MM-DD)| Fecha de finalización del periodo en que se entregaron los bienes o servicios.                      |No              | 
+| Indicador de periodo de entrada		| INPENT   |                   | Fecha (YYYY-MM-DD)|  Fecha de inicio del periodo en que los bienes o servicios fueron recibidos.                        |No              |
+| Identificador del análisis del recurso	| ANDREID  |                   | Alfanumérico      |  Código único que identifica un análisis del recurso utilizado o entregado.                         |No              |
+| Datos del análisis del recurso		| ANDREDA  |                   | Texto             |  Información específica relacionada con el análisis del recurso.                                     |No              |
+| Fecha del análisis del recurso		| ANDREDT  |                   | Fecha (YYYY-MM-DD)| Fecha en la que se realizó el análisis del recurso.                                                 | No              |
+| Cupo nominal asignado A			| CUNAMA   |                   | Numérico          | Cantidad límite asignada al recurso en el periodo, tipo A.                                          | No              |
+| Valor del cupo nominal asignado A		| CUVALA   |                   | Numérico          | Valor monetario correspondiente al cupo asignado A.                                                 | No              |
+| Cupo nominal asignado B			| CUNAMB   |                   | Numérico          | Cantidad límite asignada al recurso en el periodo, tipo B.                                          | No              |
+| Valor del cupo nominal asignado B		| CUVALB   |                   | Numérico          | Valor monetario correspondiente al cupo asignado B.                                                 | No              | 
+| Cantidad de cigarrillos sin nicotina		| CIGSHN   |                   | Numérico          | Número de cigarrillos sin nicotina entregados o facturados.                                         | No              |
+| Cantidad de cigarrillos con nicotina		| CIGCSH   |                   | Numérico          | Número de cigarrillos con nicotina entregados o facturados.                                         | No              |
+| Impuesto sobre turismos diarios		| IPTURD   |                   | Numérico          | Valor del impuesto sobre turismos aplicable por día, si corresponde.                                | No              |
+| Identificador de preparación			| PREPID   |                   | Numérico          | Código único que identifica el proceso de preparación del documento o servicio.                     | Sí              |
+| Monto de preparación				| PREPAM   |                   | Numérico          | Valor monetario asociado al costo de preparación de los bienes o servicios.                        | No              |
+| Descuento por preparación			| PREDRE   |                   | Numérico          | Valor del descuento aplicado al costo de preparación de los bienes o servicios.                    | No              |
 
 
 ##### **Ejemplo de CABDOC**
@@ -221,7 +238,25 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 		"TIPOPE": "SS-Recaudo",
 		"MEDPAG": "10",
 		"CLAVE": "123456789",
-		"USUAR": "ADVANCIT"
+		"USUAR": "ADVANCIT",
+		"INPESD": "",
+		"INPEST": "",
+		"INPEND": "",
+		"INPENT": "",
+		"ANDREID": "",
+		"ANDREDA": "",
+		"ANDREDT": "",
+		"CUNAMA": "",
+		"CUVALA": "",
+		"CUNAMB": "",
+		"CUVALB": "",
+		"CIGSHN": "",
+		"CIGCSH": "",
+		"IPTURD": "",
+		"PREPID": 0,
+		"PREPAM": "",
+		"PREDRE": ""
+
 	}
 }
 ```
@@ -253,7 +288,8 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Código ciudad                      | CODCIU   | 68001            | CHAR(20)        | Fuente tabla DANE.                                        | SI     |
 | Código departamento                | CODDEP   | 68               | CHAR(20)        | Fuente tabla DANE.                                        | SI     |
 | Obligaciones o responsabilidades   | OBLCON   | O-09             | CHAR(200)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.6 Responsabilidades fiscales)     | SI     |
-
+| Identificador del registro	     | REGID    |                  | Alfanumérico | Código único que identifica el registro del cliente en el sistema. | Sí              |
+| Nombre del registro		     | REGNAM   |                  | Texto        | Nombre o descripción oficial asociada al registro del cliente.      | Sí              |
 
 ##### **Ejemplo de CLIDOC**
 
@@ -281,7 +317,10 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 		"NOMPAI": "COLOMBIA",
 		"CODCIU": "11001",
 		"CODDEP": "11",
-		"OBLCON": "O-15"
+		"OBLCON": "O-15",
+		"REGID": "",
+		"REGNAM": ""
+
 	}
 }
 
@@ -394,12 +433,14 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 ## Campos de Detalle de Descuento (DETDES)
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
-| Consecutivo de descuento           | CONDES   |                  | INT(6)          | Número Consecutivo del descuento.                        | SI     |
-| Código de descuento                | CODDES   |                  | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.10 Tablas de tarifas por Impuesto)   | SI     |
-| Porcentaje de descuento            | PORDES   |                  | DEC(15,2)       |                                                          | SI     |
-| Valor de descuento                 | VALDES   |                  | DEC(15,2)       |                                                          | SI     |
-| Base sobre la cual se aplica el descuento | VABADE  |                  | DEC(15,2)       |                                                          | SI     |
-| Texto abierto del descuento        | TEXDES   |                  | CHAR(255)       |                                                          | SI     |
+| Consecutivo de descuento           		| CONDES   |                  | INT(6)          | Número Consecutivo del descuento.                        | SI     |
+| Código de descuento                		| CODDES   |                  | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.10 Tablas de tarifas por Impuesto)   | SI     |
+| Porcentaje de descuento            		| PORDES   |                  | DEC(15,2)       |                                                          | SI     	|
+| Valor de descuento                 		| VALDES   |                  | DEC(15,2)       |                                                          | SI     	|
+| Base sobre la cual se aplica el descuento 	| VABADE   |                  | DEC(15,2)       |                                                          | SI     	|
+| Texto abierto del descuento        		| TEXDES   |                  | CHAR(255)       |                                                          | SI     	|
+| Detalle del descuento asignado A       	| DESSAA   |                  | Texto		| Descripción específica sobre el descuento tipo A. 	   | No    	|
+| Detalle del descuento asignado B       	| DESSAB   |                  | Texto        	| Descripción específica sobre el descuento tipo B. 	   | No		|
 
 
 ##### **Ejemplo de DETDES**
@@ -413,7 +454,10 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"PORDES": "",
 			"VALDES": "",
 			"VABADE": "",
-			"TEXDES": ""
+			"TEXDES": "",
+			"DESSAA": "",
+			"DESSAB": ""
+
 		}
 	]
 }
@@ -450,6 +494,54 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 
 
 ## Campos de Detalle del Producto (DETALLEPRO)
+| Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
+|------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
+| Consecutivo de detalle de productos | IDEPOS   | 1                | INT(6)          | Consecutivo de productos en el documento.                | SI     |
+| Código de producto                 | CODITE   | 123456789        | CHAR(40)        | Código del producto en el detalle.                       | SI     |
+| Código de posición del producto    | COPODP   | 01               | CHAR(2)         | Código de la posición del producto.                      | NO     |
+| Nombre de la posición del producto | NOPODP   | Producto A       | CHAR(200)       | Nombre asignado a la posición del producto.              | NO     |
+| Valor del producto                 | VAPODP   | 10000.00         | DEC(15,2)       | Valor del producto.                                      | SI     |
+| Porcentaje del producto            | POPODP   | 19.00            | DEC(15,2)       | Porcentaje aplicado al producto.                         | SI     |
+
+
+
+##### **Ejemplo de DETALLEPRO**
+
+```json
+{
+	"DETALLEPRO": [
+		{
+			"IDEPOS": 1,
+			"CODITE": "123456",
+			"COPODP": "ZY",
+			"NOPODP": "No causa",
+			"VAPODP": "264000.00",
+			"POPODP": "0.00"
+		},
+		{
+			"IDEPOS": 2,
+			"CODITE": "654321",
+			"COPODP": "ZY",
+			"NOPODP": "No causa",
+			"VAPODP": "74560.00",
+			"POPODP": "0.00"
+		},
+		{
+			"IDEPOS": 3,
+			"CODITE": "789012",
+			"COPODP": "ZY",
+			"NOPODP": "No causa",
+			"VAPODP": "39560.00",
+			"POPODP": "0.00"
+		}
+	]
+}
+
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+## Campos de Datos de Salud (DATSAL)
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
 | Consecutivo de detalle de productos | IDEPOS   | 1                | INT(6)          | Consecutivo de productos en el documento.                | SI     |
