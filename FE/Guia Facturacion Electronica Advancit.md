@@ -542,7 +542,7 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 | `secldo`          | `CLIDOC`           | Información del cliente                              |
 | `sededo`          | `DETDOC`           | Detalle de los productos o ítems del documento       |
 | `sedepr`          | `DETALLEPRO`           | Detalle del producto adicional                       |
-| `sedeim`          | `DETIMP`           | Detalle de los impuestos aplicados                   |
+| `sedeim`          | `DETIMPDOC`           | Detalle de los impuestos aplicados                   |
 | `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
 | `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
 | `datsal`          | `DATSAL`           | Información adicional relacionada con los ítems      |
