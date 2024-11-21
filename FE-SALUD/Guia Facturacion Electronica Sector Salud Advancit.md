@@ -173,10 +173,10 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Medios de Pago		     		| MEDPAG   | 40		      | | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.2 Medios de Pago: cbc:PaymentMeansCode)  |SI|
 | Usuario                            		| USUAR    |                   | CHAR(30)       |                                                 | SI     |
 | Clave						| CLAVE    |                   | CHAR(30)       |                                                 | SI     |
-| Indicador de prestación de servicios desde	| INPESD   |                   | Fecha (YYYY-MM-DD)|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
-| Indicador de prestación de servicios hasta	| INPEST   |                   | Fecha (YYYY-MM-DD)| Fecha de finalización del periodo de prestación de servicios.                                       | Sí              |
-| Indicador de periodo de la entrega	    	| INPEND   |                   | Fecha (YYYY-MM-DD)| Fecha de finalización del periodo en que se entregaron los bienes o servicios.                      |No              | 
-| Indicador de periodo de entrada		| INPENT   |                   | Fecha (YYYY-MM-DD)|  Fecha de inicio del periodo en que los bienes o servicios fueron recibidos.                        |No              |
+| Indicador de prestación de servicios desde	| INPESD   |                   | varchar(100)	|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
+| Indicador de prestación de servicios hasta	| INPEST   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                                       | Sí              |
+| Indicador de periodo de la entrega	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo en que se entregaron los bienes o servicios.                      |No              | 
+| Indicador de periodo de entrada		| INPENT   |                   | varchar(100)	|  Fecha de inicio del periodo en que los bienes o servicios fueron recibidos.                        |No              |
 | Identificador del análisis del recurso	| ANDREID  |                   | Alfanumérico      |  Código único que identifica un análisis del recurso utilizado o entregado.                         |No              |
 | Datos del análisis del recurso		| ANDREDA  |                   | Texto             |  Información específica relacionada con el análisis del recurso.                                     |No              |
 | Fecha del análisis del recurso		| ANDREDT  |                   | Fecha (YYYY-MM-DD)| Fecha en la que se realizó el análisis del recurso.                                                 | No              |
@@ -633,12 +633,12 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 | `secado`          | `CABDOC`           | Información de la cabecera del documento (factura)   |
 | `secldo`          | `CLIDOC`           | Información del cliente                              |
 | `sededo`          | `DETDOC`           | Detalle de los productos o ítems del documento       |
-| `sedepr`          | `DETALLEPRO`           | Detalle del producto adicional                       |
-| `sedeim`          | `DETIMPDOC`           | Detalle de los impuestos aplicados                   |
+| `sedepr`          | `DETALLEPRO`       | Detalle del producto adicional                       |
+| `sedeim`          | `DETIMPDOC`        | Detalle de los impuestos aplicados                   |
 | `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
 | `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
 | `datsal`          | `DATSAL`           | Información adicional relacionada con los ítems      |
-| `pursal`          | `PURSAL`           | Datos adicionales de archivos, como anexos          |
+| `pursal`          | `PURSAL`           | Datos adicionales de archivos, como anexos          	|
 | `prepai`          | `PREPAI`           | Información relacionada con el pago                  |
 
 
