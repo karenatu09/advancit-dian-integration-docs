@@ -1,7 +1,7 @@
-# Manual de Desarrollo para Consumo de Webservice
+# Manual de Desarrollo para Consumo de Webservice Sector Salud
 
 ## 1. **Introducción**
-Este documento técnico describe cómo los desarrolladores deben consumir el Web Service de facturación electrónica, 
+Este documento técnico describe cómo los desarrolladores deben consumir el Web Service de facturación electrónica del Sector Salud, 
 el cual permite enviar documentos a la DIAN para su validación previa, mediante el método `send_document`. 
 La comunicación con el servicio se realiza mediante una petición SOAP que incluye información en formato JSON encriptado en base64.
 
@@ -27,6 +27,11 @@ Los datos que se deben enviar en la petición SOAP incluyen las siguientes secci
 - **DETIMP**: Detalle de impuestos.
 - **ADIDOC**: Información adicional del documento.
 - **DETDES**: Detalle de descuentos.
+- **DATSAL**: Datos de salud.
+- **PREPAI**: Información sobre el pago previo, que incluye el monto abonado o anticipado por el paciente o aseguradora.
+- **PURSAL**: Datos relacionados con archivos.
+- **PUESAL**: Datos relacionados con archivos adicionales.
+
 
 Cada una de estas secciones se incluye como un elemento `item` dentro del cuerpo SOAP.
 
@@ -176,9 +181,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Usuario                            		| USUAR    |                   | CHAR(30)       |                                                 | SI     |
 | Clave						| CLAVE    |                   | CHAR(30)       |                                                 | SI     |
 | Indicador de prestación de servicios desde	| INPESD   |                   | varchar(100)	|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
-| Indicador de prestación de servicios hasta	| INPEST   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                                       | Sí              |
-| Indicador de periodo de la entrega	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo en que se entregaron los bienes o servicios.                      |No              | 
-| Indicador de periodo de entrada		| INPENT   |                   | varchar(100)	|  Fecha de inicio del periodo en que los bienes o servicios fueron recibidos.                        |No              |
+| Indicador de prestación de servicios hasta	| INPEST   |                   | varchar(100)	| Hora de inicio del periodo de prestación de servicios.                                       | Sí              |
+| Indicador de periodo de la entrega	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                      |No              | 
+| Indicador de periodo de entrada		| INPENT   |                   | varchar(100)	| Hora de finalización del periodo de prestación de servicios.                         |No              |
 | Identificador del análisis del recurso	| ANDREID  |                   | Alfanumérico      |  Código único que identifica un análisis del recurso utilizado o entregado.                         |No              |
 | Datos del análisis del recurso		| ANDREDA  |                   | Texto             |  Información específica relacionada con el análisis del recurso.                                     |No              |
 | Fecha del análisis del recurso		| ANDREDT  |                   | Fecha (YYYY-MM-DD)| Fecha en la que se realizó el análisis del recurso.                                                 | No              |
@@ -198,6 +203,7 @@ NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experiment
 ##### **Ejemplo de CABDOC**
 
 ```json
+
 {
 	"CABDOC": {
 		"NITEMP": "123456789",
@@ -238,7 +244,7 @@ NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experiment
 		"TOTIMP": "0.00",
 		"TOTDES": "0.00",
 		"DIPAPA": "0",
-		"TIPOPE": "SS-Recaudo",
+		"TIPOPE": "SS-CUFE",
 		"MEDPAG": "10",
 		"CLAVE": "123456789",
 		"USUAR": "ADVANCIT",
@@ -259,9 +265,9 @@ NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experiment
 		"PREPID": 0,
 		"PREPAM": "",
 		"PREDRE": ""
-
 	}
 }
+
 ```
 
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
@@ -595,59 +601,37 @@ A continuación, se presenta un ejemplo de cómo estructurar los datos en format
   ]
 }
 ```
-
-## Campos de Datos de Salud (DATSAL)
-
-Para el sector salud, se ha definido un arreglo que contiene información adicional requerida, como el código del prestador, la modalidad de pago, la cobertura del plan de beneficios, entre otros. Este arreglo incluye objetos con dos campos principales: 
-
-- **DASNAM**: Nombre del dato de salud.
-- **DASVAL**: Valor correspondiente al dato.
-
-Los objetos que conforman este arreglo están descritos en la siguiente tabla:
-
-| **Descripción**                  | **Nombre**                   | **Ejemplo**           | **Especificación** | **Nota**                                                | **Obligatorio** |
-|----------------------------------|------------------------------|-----------------------|--------------------|---------------------------------------------------------|-----------------|
-| Código del prestador             | `IDEPOS`                    | `6541324642159`       | varchar(150)               | Identificador único del prestador de servicios.         | Sí              |
-| Modalidad de pago                | `MODALIDAD_PAGO`            | `11`                 | varchar(150)           | Tipo de modalidad de pago utilizado.                    | Sí              |
-| Cobertura del plan de beneficios | `COBERTURA_PLAN_BENEFICIOS` | `01`                 | varchar(150)	     | Identifica la cobertura específica del plan de salud.   | No              |
-| Número del contrato              | `NUMERO_CONTRATO`           | `632656-5416`         | varchar(150)          | Referencia única del contrato del servicio.             | No              |
-| Número de póliza                 | `NUMERO_POLIZA`             | `10000.00`            | varchar(150)          | Monto asociado a la póliza del beneficiario.            | Sí              |
-
----
-
-### Ejemplo de estructura JSON
-
-A continuación, se presenta un ejemplo de cómo estructurar los datos en formato JSON:
-
-```json
-{
-  "DATSAL": [
-    {
-      "DASNAM": "CODIGO_PRESTADOR",
-      "DASVAL": "6541324642159"
-    },
-    {
-      "DASNAM": "MODALIDAD_PAGO",
-      "DASVAL": "11"
-    },
-    {
-      "DASNAM": "COBERTURA_PLAN_BENEFICIOS",
-      "DASVAL": "01"
-    },
-    {
-      "DASNAM": "NUMERO_CONTRATO",
-      "DASVAL": "632656-5416"
-    },
-    {
-      "DASNAM": "NUMERO_POLIZA",
-      "DASVAL": "656565"
-    }
-  ]
-}
-```
 ### Notas importantes:
 1. Este JSON debe codificarse en **Base64** antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 2. Todos los campos obligatorios deben estar presentes para garantizar el cumplimiento de las especificaciones.
+
+
+## Campos de Pago Previo (PREPAI)
+| Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
+|------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
+| Código del tipo de pago            | PRECOD   | 01               | CHAR(2)         | Código del tipo de pago (ej. "01" para copago).          | SI     |
+| Nombre del tipo de pago            | PRENOM   | Copago           | CHAR(50)        | Nombre del tipo de pago.                                 | SI     |
+| Valor del pago                     | PREVAL   | 6900.00          | DEC(15,2)       | Valor del pago realizado.                                | SI     |
+| Fecha del pago                     | PREFEC   | 2024-09-06       | DATE            | Fecha en que se realizó el pago.                         | SI     |
+
+##### **Ejemplo de PREPAI**
+
+```json
+{
+	"PREPAI": [
+		{
+			"PRECOD": "01",
+			"PRENOM": "Copago",
+			"PREVAL": "6900.00",
+			"PREFEC": "2024-09-06"
+		}
+	]
+}
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+
 
 ## Campos de Datos de Salud - Información de Archivos (PURSAL)
 
@@ -684,7 +668,6 @@ En esta sección se detalla la estructura para los datos asociados a archivos re
 1. Este JSON debe codificarse en **Base64** antes de ser incluido en el XML SOAP correspondiente.
 2. Asegúrate de que todos los campos cumplen con las especificaciones para evitar errores en el procesamiento.
 
-3. 
 ## Campos de Datos de Salud - Información Adicional de Archivos (PUESAL)
 
 Esta sección describe la estructura de los datos relacionados con archivos adicionales que deben incluirse en los procesos de facturación electrónica para el sector salud.  
@@ -770,9 +753,11 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 | `sedeim`          | `DETIMPDOC`        | Detalle de los impuestos aplicados                   |
 | `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
 | `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
-|                   | `DATSAL`           | Información adicional relacionada con los ítems      |
-|                   | `PURSAL`           | Datos relacionados con archivos                     |
-|                   | `PUESAL`           | Datos relacionados con archivos adicionales          |
+| `sedecu`          | `DESCDOC`          | Datos de la empresa que emite el documento           |
+| `datsal`          | `DATSAL`           | Datos Sector Salud					|
+| `seepai`          | `PREPAI`           | Información sobre el pago previo sector salud	|
+| `pursal`          | `PURSAL`           | Datos relacionados con archivos                     	|
+| `puesal`          | `PUESAL`           | Datos relacionados con archivos adicionales          |
 
 
 ## 6. **Ejemplos Prácticos**
@@ -861,6 +846,8 @@ Existen 4 tipos de envíos que determinan los campos obligatorios dependiendo de
 
 Los archivos están disponibles en el directorio del repositorio.
 
+---
+
 ### **8. Documentación Relacionada**
 
 Para cumplir con los requisitos técnicos y normativos de la facturación electrónica en Colombia, es importante consultar la documentación oficial proporcionada por la DIAN. A continuación, se incluyen enlaces a los documentos clave y herramientas que son referenciados a lo largo de este manual:
@@ -875,6 +862,9 @@ La DIAN proporciona una serie de recursos y herramientas técnicas que apoyan el
 
 - [Caja de Herramientas Técnica - Sistema de Facturación Electrónica](https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/documentacion-tecnica/)
 
+#### **8.3. Documentos Clave para el Sector Salud**
+
+- [Resolución 1884 de 2024: Un Vistazo a los Cambios en el Sector Salud Colombiano](https://www.minsalud.gov.co/Normatividad_Nuevo/Resoluci%C3%B3n%20No%201884%20de%202024.pdf)
+- [Modificaciones Resolución 636 de 2024: Factura RIPS](https://www.minsalud.gov.co/Normatividad_Nuevo/Resoluci%C3%B3n%20No%20636%20de%202024.pdf)
+
 ---
-
-
