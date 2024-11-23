@@ -564,8 +564,8 @@ Los objetos que conforman este arreglo están descritos en la siguiente tabla:
 | **Descripción**                  | **Nombre**                   | **Ejemplo**           | **Especificación** | **Nota**                                                | **Obligatorio** |
 |----------------------------------|------------------------------|-----------------------|--------------------|---------------------------------------------------------|-----------------|
 | Código del prestador             | `IDEPOS`                    | `6541324642159`       | varchar(150)               | Identificador único del prestador de servicios.         | Sí              |
-| Modalidad de pago                | `MODALIDAD_PAGO`            | `11`                 | varchar(150)           | Tipo de modalidad de pago utilizado.                    | Sí              |
-| Cobertura del plan de beneficios | `COBERTURA_PLAN_BENEFICIOS` | `01`                 | varchar(150)	     | Identifica la cobertura específica del plan de salud.   | No              |
+| Modalidad de pago                | `MODALIDAD_PAGO`            | `11`                 | varchar(150)           | Ver tabla LINEAMIENTOS PARA LA GENERACIÓN, VALIDACIÓN Y ENVÍO DEL REGISTRO INDIVIDUAL DE PRESTACION DE SERVICIOS DE SALUD – RIPS, COMO SOPORTE DE LA FACTURA ELECTRÓNICA DE VENTA – FEV EN SALUD (Tabla 2: Accesos directos a las tablas de FEV-RIPS - TB 38)                    | Sí              |
+| Cobertura del plan de beneficios | `COBERTURA_PLAN_BENEFICIOS` | `01`                 | varchar(150)	     |  Ver tabla LINEAMIENTOS PARA LA GENERACIÓN, VALIDACIÓN Y ENVÍO DEL REGISTRO INDIVIDUAL DE PRESTACION DE SERVICIOS DE SALUD – RIPS, COMO SOPORTE DE LA FACTURA ELECTRÓNICA DE VENTA – FEV EN SALUD (Tabla 2: Accesos directos a las tablas de FEV-RIPS - TB 36) | No              |
 | Número del contrato              | `NUMERO_CONTRATO`           | `632656-5416`         | varchar(150)          | Referencia única del contrato del servicio.             | No              |
 | Número de póliza                 | `NUMERO_POLIZA`             | `10000.00`            | varchar(150)          | Monto asociado a la póliza del beneficiario.            | Sí              |
 
@@ -764,6 +764,7 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 
 ### **Ejemplo completo de petición SOAP**
 ```xml
+
 <?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope 
     SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" 
@@ -773,61 +774,63 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
     xmlns:ns2="http://xml.apache.org/xml-soap" 
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
-    <SOAP-ENV:Body>
-        <ns1:send_document>
-            <sendoc xsi:type="ns2:Map">
-                <!-- CABDOC - Información de la cabecera del documento -->
-                <item>
-                    <key xsi:type="xsd:string">secado</key>
-                    <value xsi:type="xsd:string">{JSON CABDOC codificado en BASE64}</value>
-                </item>
 
-                <!-- CLIDOC - Información del cliente -->
-                <item>
-                    <key xsi:type="xsd:string">secldo</key>
-                    <value xsi:type="xsd:string">{JSON CLIDOC codificado en BASE64}</value>
-                </item>
-
-                <!-- DETDOC - Detalle de los ítems del documento -->
-                <item>
-                    <key xsi:type="xsd:string">sededo</key>
-                    <value xsi:type="xsd:string">{JSON DETDOC codificado en BASE64}</value>
-                </item>
-
-                <!-- DETALLEPRO - Detalle del producto adicional (vacío en este caso) -->
-                <item>
-                    <key xsi:type="xsd:string">sedepr</key>
-                    <value xsi:type="xsd:string">e30=</value>
-                </item>
-
-                <!-- DETIMP - Detalle de los impuestos -->
-                <item>
-                    <key xsi:type="xsd:string">sedeim</key>
-                    <value xsi:type="xsd:string">{JSON DETIMP codificado en BASE64}</value>
-                </item>
-
-                <!-- Información adicional del documento (vacío en este caso) -->
-                <item>
-                    <key xsi:type="xsd:string">seaddo</key>
-                    <value xsi:type="xsd:string">e30=</value>
-                </item>
-
-                <!-- DATOEMP - Información de la empresa -->
-                <item>
-                    <key xsi:type="xsd:string">sedaws</key>
-                    <value xsi:type="xsd:string">{JSON DATOEMP codificado en BASE64}</value>
-                </item>
-
-                <!-- Información adicional del cliente (vacío en este caso) -->
-                <item>
-                    <key xsi:type="xsd:string">sedecu</key>
-                    <value xsi:type="xsd:string">e30=</value>
-                </item>
-            </sendoc>
-        </ns1:send_document>
-    </SOAP-ENV:Body>
+  <SOAP-ENV:Body>
+    <ns1:send_document>
+      <sendoc xsi:type="ns2:Map">
+        <item>
+          <key xsi:type="xsd:string">secado</key>
+          <value xsi:type="xsd:string">{JSON DETDOC codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">secldo</key>
+          <value xsi:type="xsd:string">{JSON CLIDOC codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">sededo</key>
+          <value xsi:type="xsd:string">{JSON DETDOC codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">sedepr</key>
+          <value xsi:type="xsd:string">{JSON DETALLEPRO codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">sedeim</key>
+          <value xsi:type="xsd:string">{JSON DETIMP codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">seaddo</key>
+          <value xsi:type="xsd:string">{JSON SEADDO codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">sedaws</key>
+          <value xsi:type="xsd:string">{JSON DATOEMP codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">sedecu</key>
+          <value xsi:type="xsd:string">{JSON DESCDOC codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">datsal</key>
+          <value xsi:type="xsd:string">{JSON DATSAL codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">seepai</key>
+          <value xsi:type="xsd:string">{JSON PREPAI codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">pursal</key>
+          <value xsi:type="xsd:string">{JSON PURSAL codificado en BASE64}</value>
+        </item>
+        <item>
+          <key xsi:type="xsd:string">puesal</key>
+          <value xsi:type="xsd:string">{JSON PUESAL codificado en BASE64}</value>
+        </item>
+      </sendoc>
+    </ns1:send_document>
+  </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
+
 ```
 
 **Nota:** Los json encriptados en BASE64 no deben ir contenidos entre las llaves cuando nos refereimos a {JSON DATOEMP codificado en BASE64} dentro del valor del item.
