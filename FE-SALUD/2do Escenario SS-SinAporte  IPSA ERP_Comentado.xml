@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:sts="dian:gov:co:facturaelectronica:Structures-2-1"
+         xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"
+         xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 http://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-Invoice-2.1.xsd">
+   <ext:UBLExtensions>
+	  <ext:UBLExtension> <!--Información adicional específica para el sector salud [1..N]-->
+			<ext:ExtensionContent> <!--Grupo que contiene la información personalizada del sector[1..1]-->
+				<CustomTagGeneral> <!--Grupo de información personalizable dependiendo el sector [1..1]-->
+					<Name>Responsable</Name> <!--Responsable [1..1]-->
+					<Value>www.minSalud.gov.co</Value> <!--Valor fijo www.minSalud.gov.co[1..1]-->
+					<Name>Tipo, identificador:año del acto administrativo</Name> <!--Tipo, identificador:año del acto administrativo[1..1]-->
+					<Value>Resolución 001000:2020</Value> <!--Resolución 001000:2020[1..1]-->
+					<Interoperabilidad> <!-- Grupo que identifica el sector administrativo del gobierno [1..1] -->
+						<Group schemeName="Sector Salud"> <!-- Fragmento de sector que se reporta [1..1]-->
+							<Collection schemeName="Edward Armando Pérez"> <!-- Nombre del miembro o unidad del sector + Detalles individuales de la información de un miembro [1..N] -->
+								<AdditionalInformation> <!-- Detalle individual [1..1] -->
+									<Name>CODIGO_PRESTADOR</Name> <!-- Debe ser informado el literal “CODIGO_PRESTADOR” [1..1] -->
+									<Value>ABC12345</Value> <!-- código asignado en el Sistema general de seguridad Social en Salud SGSSS [0..1] -->
+								</AdditionalInformation>
+								<AdditionalInformation> <!-- Detalle individual [1..1] -->
+									<Name>MODALIDAD_PAGO</Name> <!-- Debe ser informado el literal “MODALIDAD_PAGO”[1..1] -->
+									<Value schemeID="04"
+									       schemeName="salud_modalidad_pago.gc">Pago por evento</Value> <!-- Modalidades de pago numeral(9B) @schemeID: Código de Tabla 9B @schemeName: Debe ser informado el Literal salud_modalidad_pago.gc [1..1] -->
+								</AdditionalInformation>
+								<AdditionalInformation> <!-- Detalle individual [1..1] -->
+									<Name>COBERTURA_PLAN_BENEFICIOS</Name> <!-- Debe ser informado el literal “COBERTURA_PLAN_BENEFICIOS” 1..1 -->
+									<Value schemeID="10"
+									       schemeName="salud_cobertuta.gc">Plan Complementario de Salud</Value> <!-- valores posibles en la columna cobertura (9.C)@schemeID: Código de #9.C @schemeName: Debe ser informado el Literal salud_cobertura.gc [1..1] -->
+								</AdditionalInformation>
+								<AdditionalInformation> <!-- Detalle individual [1..1] -->
+									<Name>NUMERO_CONTRATO</Name> <!-- Debe ser informado el literal “NUMERO_CONTRATO” [1..1] -->
+									<Value>A123654789</Value> <!-- [0..1] -->
+								</AdditionalInformation>
+								<AdditionalInformation> <!-- Detalle individual [1..1] -->
+									<Name>NUMERO_POLIZA</Name> <!-- Debe ser informado el literal “NUMERO_POLIZA” [1..1] -->
+									<Value>ZAS321654987</Value> <!-- [0..1] -->
+								</AdditionalInformation>								
+							</Collection>
+						</Group>
+						<InteroperabilidadPT> <!-- Grupo de información complementaria a la transacción OPCIONAL [0..1] -->
+							<URLDescargaAdjuntos> <!-- Grupo de información para indicar la descarga de documentos complementarios [1..1] -->
+								<URL>www.ips-1.com.co</URL> <!-- URL para la descarga de los documentos complementarios [1..1] -->
+								<ParametrosArgumentos> <!--[0...1]-->
+									<ParametroArgumento> <!-- Grupo de información para indicar características adicionales a la URL informada [0..N] -->
+										<Name>excelFile</Name>  <!-- Nombre del elemento a informar [1..1] -->
+										<Value>a1b2c3.xlsx</Value> <!-- Valor del elemento a informar [1..1] -->
+									</ParametroArgumento>
+									<ParametroArgumento> <!-- Grupo de información para indicar características adicionales a la URL informada [0..N] -->
+										<Name>txtFile</Name> <!-- Nombre del elemento a informar [1..1] -->
+										<Value>a1b2c3.txt</Value> <!-- Valor del elemento a informar [1..1] -->
+									</ParametroArgumento>
+								</ParametrosArgumentos>
+							</URLDescargaAdjuntos>
+							<EntregaDocumento> <!-- Grupo de información para indicar la entrega que hará el adquiriente de los eventos [0..1] -->
+								<WS>https://ws4erp.ips-987.com.co/WcfRecibiendoDocs4ERP.svc?wsdl</WS> <!-- Web Service informado por el facturador electrónico al adquiriente [1..1] -->
+								<ParametrosArgumentos><!--[1...1]-->
+									<ParametroArgumento> <!--[1...N]-->
+										<Name>Método-1</Name><!--[1...1]-->
+										<Value>ClienteEntregaAcuseDeReciboDeFEV-VP</Value> <!--[1...1]-->
+									</ParametroArgumento>
+									<ParametroArgumento> <!--[1...N]-->
+										<Name>Método-2</Name> <!--[1...1]-->
+										<Value>ClienteEntregaConstanciaDeMercanciaEntregada</Value> <!--[1...1]-->
+									</ParametroArgumento>
+								</ParametrosArgumentos>
+							</EntregaDocumento>
+						</InteroperabilidadPT>
+					</Interoperabilidad>
+				</CustomTagGeneral>
+			</ext:ExtensionContent>
+		</ext:UBLExtension>
+		<ext:UBLExtension>
+		<ext:UBLExtension>
+			<!-- Informaciones de control de operaciones, DIAN Extension -->
+		</ext:UBLExtension>
+		<ext:UBLExtension>
+			<!-- Firma del documento -->
+		</ext:UBLExtension>
+		</ext:UBLExtension>
+	</ext:UBLExtensions>
+	<cbc:CustomizationID>SS-SinAporte</cbc:CustomizationID> <!-- Indicador del tipo de operación de recaudo del Sector Salud - Debe reportarse "SS-SinAporte" -->
+	<cbc:ProfileExecutionID>1</cbc:ProfileExecutionID> <!-- Tipo de ambiente [1..1] tabla 13.1.1 -->
+	<cbc:ID>BC103911</cbc:ID> <!--Número de factura o factura cambiaria. Incluye prefijo + consecutivo de factura autorizados por la DIAN  [1..1] -->
+	<cbc:IssueDate>2023-09-11</cbc:IssueDate> <!-- Fecha de generación de la factura [1..1] formato aaaa-mm-dd-->
+	<cbc:IssueTime>12:53:36-05:00</cbc:IssueTime> <!--Hora de emisión [1..1] -->
+	<cbc:DueDate>2023-09-11</cbc:DueDate> <!-- Fecha de Vencimiento de la factura [0..1] -->
+	<cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode> <!-- SS-CUFE para {01-04}, SS-CUDE para {03}, SS-POS para{POS})-->
+	<cbc:Note/> <!-- Informacion adicional: Texto libre relativo al documento [0..N] -->
+	<cbc:DocumentCurrencyCode>COP</cbc:DocumentCurrencyCode> <!--Divisa de la Nota Credito: Divisa aplicable a toda la Nota Credito [1..1] Tabla 13.3.3  -->
+	<cbc:LineCountNumeric>1</cbc:LineCountNumeric> <!--Número o cantidad de elementos InvoiceLine de la Nota Credito [1..1]-->
+	<cac:InvoicePeriod> <!--Grupo de campos relativos al Periodo de Facturación[1..1]-->
+		<cbc:StartDate>9999-12-31</cbc:StartDate> <!-- Fecha de inicio del periodo de facturación [1..1] -->
+		<cbc:StartTime>23:59:59-05:00</cbc:StartTime> <!-- Hora de inicio del periodo de facturación [0..1] -->
+		<cbc:EndDate>9999-12-31</cbc:EndDate> <!-- Fecha de fin del periodo de facturación [1..1] -->
+		<cbc:EndTime>23:59:59-05:00</cbc:EndTime> <!-- Hora de fin del periodo de facturación [0..1] -->
+	</cac:InvoicePeriod>
+	<cac:OrderReference> <!-- Grupo de campos para información que describen una orden de pedido para esta FV [0..1]-->
+		<cbc:ID>526446332432</cbc:ID> <!-- Prefijo y Número del documento orden referenciado [1..1] -->
+		<cbc:IssueDate>2021-02-17</cbc:IssueDate> <!-- Fecha de generación del documento orden referenciado [0..1] -->
+	</cac:OrderReference>
+	<cac:AdditionalDocumentReference><!-- Grupo de campos para información que describen un documento referenciado por esta factura Obligatorio si es factura tipo 03 contingencia[0,N]-->
+        <cbc:ID>CONT20</cbc:ID> <!-- Prefijo y Número del documento referenciado [1..1]-->
+        <cbc:IssueDate>2022-08-05</cbc:IssueDate> <!-- Fecha de emisión del documento referenciado [0..1]-->
+        <cbc:DocumentTypeCode>FTPC</cbc:DocumentTypeCode> <!-- Identificdor del tipo de documento de referencia [0..1]-->
+    </cac:AdditionalDocumentReference>
+	<cac:AccountingSupplierParty> <!--Grupo con información que definen el obligado a Nota Creditor: Emisor de la Nota Credito [1..1]-->
+		<cbc:AdditionalAccountID>1</cbc:AdditionalAccountID> <!--Identificador de tipo de organización jurídica de la de persona [1..1] Tabla 13.2.3-->
+		<cac:Party> <!--Grupo con información generales sobre el obligado a Nota Creditor [1..1] -->
+			<cac:PartyName> <!--Grupo con información sobre el nombre comercial del Emisor[0..1]-->
+				<cbc:Name>CAJA COLOMBIANA DE SUBSIDIO FAMILIAR COLSUBSIDIO</cbc:Name> <!-- Nombre comercial del emisor -->
+			</cac:PartyName>
+			<cac:PhysicalLocation> <!--Grupo con información con respecto a la localización física del adquiriente Si el adquiriente es Consumidor Final y el emisor vende por fuera de su sede comercial a establecimiento debe informar este grupo [0..1] -->
+				<cac:Address> <!--Grupo con datos sobre la dirección de una persona o entidad que identifica la dirección física de recepción del adquiriente [1..1]-->
+					<cbc:ID>11001</cbc:ID> <!--Código del municipio Tabla 13.4.3[1..1]-->
+					<cbc:CityName>BOGOTA D.C.</cbc:CityName> <!--Nombre de la ciudad Tabla 13.4.3[0..1] -->
+					<cbc:PostalZone>11001</cbc:PostalZone> <!-- Código postal Tabla 13.4.4 [0..1]-->
+					<cbc:CountrySubentity>BOGOTA D.C.</cbc:CountrySubentity> <!--Nombre del Departamento Tabla 13.4.2 [0..1]-->
+					<cbc:CountrySubentityCode>11</cbc:CountrySubentityCode> <!--Código del Departamento Tabla 13.4.2 [1..1] -->
+					<cac:AddressLine> <!--Grupo de elemento que identifica libremente la dirección [1..N]-->
+						<cbc:Line>CALLE 26 N. 25-50</cbc:Line> <!-- Elemento de texto libre, que el emisor puede utilizar para poner todas las información de la dirección del adquiriente, en lugar de utilizar elementos estructurados (los demás elementos de este grupo) [1..1]-->
+					</cac:AddressLine>
+					<cac:Country> <!--Grupo con información sobre el país [1..1]-->
+						<cbc:IdentificationCode>CO</cbc:IdentificationCode> <!-- Código dentificador del país [1..1] tabla 13.4.1-->
+						<cbc:Name languageID="es">Colombia</cbc:Name>  <!--Identificador del lenguaje utilizado en el nombre del país [1..1] tabla 13.3.2. + Nombre del país [0..1] tabla 13.4.1-->
+					</cac:Country>
+				</cac:Address>
+			</cac:PhysicalLocation>
+			<cac:PartyTaxScheme> <!--Grupo de información tributarias del emisor [1..1]-->
+				<cbc:RegistrationName>CAJA COLOMBIANA DE SUBSIDIO FAMILIAR COLSUBSIDIO</cbc:RegistrationName> <!--Nombre o Razón Social del emisor [1..1]-->
+				<cbc:CompanyID schemeAgencyID="195"
+				               schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)"
+				               schemeID="1"
+				               schemeName="31">860007336</cbc:CompanyID> <!-- DV del NIT del emisor [1..1] + Tipo de identificador fiscal [1..1] tabla 13.2.1 + Debe ser informado el literal “195” [0..1] + Debe ser informado el literal “CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)” [0..1]+ NIT del emisor sin digito de verificación [1..1] -->
+				<cbc:TaxLevelCode listName="48">O-13;O-15;O-23</cbc:TaxLevelCode> <!-- @listName Opcional, si informado indicar “No aplica” [0..1] + Obligaciones o responasbilidades del contribuyente; incluye el régimen al que pertenece el emisor tabla 13.2.6 [1..1]-->
+				<cac:RegistrationAddress> <!-- Grupo de información para informar dirección fiscal [0..1]-->
+					<cbc:ID>11001</cbc:ID> <!--Código del municipio tabla 13.4.3 [1..1]-->
+					<cbc:CityName>BOGOTA D.C.</cbc:CityName> <!--Nombre de la ciudad tabla 13.4.3 [1..1] -->
+					<cbc:PostalZone>11001</cbc:PostalZone> <!--Código postal tabla 13.4.4 [0..1]-->
+					<cbc:CountrySubentity>BOGOTA D.C.</cbc:CountrySubentity> <!--Nombre del Departamento tabla 13.4.2 [1..1]-->
+					<cbc:CountrySubentityCode>11</cbc:CountrySubentityCode> <!-- Código del Departamento tabla 13.4.2 [1..1] -->
+					<cac:AddressLine> <!--Grupo de elemento que identifica libremente la dirección [0..1] -->
+						<cbc:Line>CALLE 26 N. 25-50</cbc:Line> <!--Elemento de texto libre, que el emisor puede utilizar para poner todas las información de su dirección, en lugar de utilizar elementos estructurados (los demás elementos de este grupo) [1..1]-->
+					</cac:AddressLine>
+					<cac:Country> <!--Grupo con información sobre el país[1..1] -->
+						<cbc:IdentificationCode>CO</cbc:IdentificationCode> <!--Código dentificador del país tabla 13.4.1 [1..1]-->
+						<cbc:Name languageID="es">Colombia</cbc:Name> <!-- Identificador del lenguaje utilizado en el nombre del país + Nombre del país tabla 13.4.1 [0..1]-->
+					</cac:Country> 
+				</cac:RegistrationAddress>
+				<cac:TaxScheme> <!--Grupo de detalles tributarios del emisor[1..1]-->
+					<cbc:ID>01</cbc:ID> <!--Identificador del tributo tabla 13.2.6.2 [1..1]-->
+					<cbc:Name>IVA</cbc:Name> <!--Nombre del tributo tabla 13.2.6.2 [1..1]-->
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity> <!--Grupo de información legales del emisor [1..1] -->
+				<cbc:RegistrationName>CAJA COLOMBIANA DE SUBSIDIO FAMILIAR COLSUBSIDIO</cbc:RegistrationName>  <!--Nombre o Razón Social del emisor [1..1]-->
+				<cbc:CompanyID schemeAgencyID="195"
+				               schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)"
+				               schemeID="1"
+				               schemeName="31">860007336</cbc:CompanyID> <!--DV del NIT del emisor [1..1] + Tipo de identificador fiscal [1..1] tabla 13.2.1 + Debe ser informado el literal “195” [0..1] + Debe ser informado el literal “CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)” [0..1]+ NIT del emisor sin digito de verificación [1..1]  -->
+				<cac:CorporateRegistrationScheme> <!--Grupo de información de registro del emisor [0..1]-->
+					<cbc:ID>S905</cbc:ID> <!--Prefijo de la facturación usada para el punto de venta [0..1]-->
+					<cbc:Name>R040614086</cbc:Name> <!--Número de matrícula mercantil [0..1]-->
+				</cac:CorporateRegistrationScheme>
+			</cac:PartyLegalEntity>
+			<cac:Contact> <!--Grupo de detalles con información de contacto del emsior [0..1] -->
+				<cbc:Telephone>3438200-000</cbc:Telephone> <!-- Número de teléfono, celular u otro [0..1] -->
+				<cbc:Telefax>2412</cbc:Telefax> <!-- Número de teléfono, celular u otro [0..1] -->
+				<cbc:ElectronicMail>infofacturaelectronica@colsubsidio.com</cbc:ElectronicMail> <!--Correo electrónico de contacto [1..1], debe estar alineado con el correo recepcion DIAN-->
+			</cac:Contact>
+		</cac:Party>
+	</cac:AccountingSupplierParty>
+	<cac:AccountingCustomerParty> <!--Grupo con información que definen el Adquiriente [1..1]-->
+		<cbc:AdditionalAccountID>2</cbc:AdditionalAccountID> <!-- Cuando sea persona natural [1..1] -->
+		<cac:Party> <!-- Datos de quien paga la cuota de servicio, el cotizante [1..1] -->
+			<cac:PartyIdentification> <!--Grupo para informar el documento del adquiriente[1..1]-->
+				<cbc:ID schemeName="31">999999999</cbc:ID> <!--Identificación del adquiriente [1..1] + DV del NIT del adquiriente [0..1] + Tipo de identificador fiscal [1..1] tabla 13.2.1-->
+			</cac:PartyIdentification>
+			<cac:PartyName> <!--Grupo con información sobre el nombre del adquiriente[0..1]-->
+				<cbc:Name>NUEVA EPS</cbc:Name> <!--Nombre comercial del adquiriente [1..1]-->
+			</cac:PartyName>
+			<cac:PhysicalLocation> <!--Grupo con información con respecto a la localización física del adquiriente Si el adquiriente es Consumidor Final y el emisor vende por fuera de su sede comercial a establecimiento debe informar este grupo -->
+				<cac:Address> <!--Grupo con datos sobre la dirección de una persona o entidad que identifica la dirección física de recepción del adquiriente [0..1]-->
+					<cbc:ID>25754</cbc:ID> <!--Código del municipio tabla 13.4.3[1..1]-->
+					<cbc:CityName>SOACHA</cbc:CityName> <!--Nombre de la ciudad tabla 13.4.3[0..1] -->
+					<cbc:PostalZone>25754</cbc:PostalZone> <!-- Código postal tabla 13.4.4 [0..1]-->
+					<cbc:CountrySubentity>CUNDINAMARCA</cbc:CountrySubentity> <!--Nombre del Departamento tabla 13.4.2 [0..1]-->
+					<cbc:CountrySubentityCode>25</cbc:CountrySubentityCode> <!--Código del Departamento tabla 13.4.2 [1..1] -->
+					<cac:AddressLine> <!--Grupo de elemento que identifica libremente la dirección [0..1]-->
+						<cbc:Line>CALLE 24 SUR 14 34 SOACHA</cbc:Line> <!-- Elemento de texto libre, que el emisor puede utilizar para poner todas las información de la dirección del adquiriente, en lugar de utilizar elementos estructurados (los demás elementos de este grupo)-->
+					</cac:AddressLine>
+					<cac:Country> <!--Grupo con información sobre el país [1..1] -->
+						<cbc:IdentificationCode>CO</cbc:IdentificationCode> <!--Código dentificador del país tabla 13.4.1 [1..1]-->
+						<cbc:Name languageID="es">Colombia</cbc:Name> <!--Identificador del lenguaje utilizado en el nombre del país tabla 13.3.2 [1..1]+ Nombre del país tabla 13.4.1 [0..1]-->
+					</cac:Country>
+				</cac:Address>
+			</cac:PhysicalLocation>
+			<cac:PartyTaxScheme> <!-- Datos de quien paga cuota del servicio en //cac:PartyTaxScheme [1..1] -->
+				<cbc:RegistrationName>NUEVA EPS</cbc:RegistrationName> <!--Nombre o Razón Social del adquiriente [1..1]-->
+				<cbc:CompanyID schemeAgencyID="195"
+				               schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)"
+				               schemeID=""
+				               schemeName="31">999999999</cbc:CompanyID> <!--DV del NIT del adquiriente [1..1] + Tipo de identificador fiscal [1..1] tabla 13.2.1 + Debe ser informado el literal “195” [0..1] + Debe ser informado el literal “CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)” [0..1]+ NIT del Adquiriente sin digito de verificación [1..1] -->
+				<cbc:TaxLevelCode listName="49">ZZ</cbc:TaxLevelCode> <!--Régimen al que pertenece el Adquiriente Opcional, si informado indicar “No aplica” [0..1]+ Obligaciones del contribuyente tabla 13.2.6.1 [0..1] -->
+				<cac:RegistrationAddress> <!--RegistrationAddress Grupo de información para la dirección fiscal del adquiriente [0..1] -->
+					<cbc:ID>25754</cbc:ID> <!-- Código del municipio tabla 13.4.3 [0..1]-->
+					<cbc:CityName>SOACHA</cbc:CityName> <!--Nombre de la ciudad tabla 13.4.3 [0..1] -->
+					<cbc:PostalZone>25754</cbc:PostalZone> <!-- Código postal tabla 13.4.4[0..1]-->
+					<cbc:CountrySubentity>CUNDINAMARCA</cbc:CountrySubentity> <!-- Nombre del Departamento tabla 13.4.2.[0..1]-->
+					<cbc:CountrySubentityCode>25</cbc:CountrySubentityCode> <!-- Código del Departamento tabla 13.4.2.[0..1]-->
+					<cac:AddressLine> <!--Grupo de elemento que identifica libremente la dirección [0..1] -->
+						<cbc:Line>CALLE 24 SUR 14 34</cbc:Line> <!--Elemento de texto libre, que el emisor puede elegir utilizar para poner todas las información de la dirección del adquiriente, en lugar de utilizar elementos estructurados (los demás elementos de este grupo) [1..1]-->
+					</cac:AddressLine>
+					<cac:Country> <!--Grupo con información sobre el país [1..1] -->
+						<cbc:IdentificationCode>CO</cbc:IdentificationCode> <!--Código dentificador del país tabla 13.4.1 [1..1] -->
+						<cbc:Name languageID="es">Colombia</cbc:Name> <!--Identificador del lenguaje utilizado en el nombre del país  tabla 13.3.2[1..1]+ Nombre del país tabla 13.4.1 [0..1]-->
+					</cac:Country>
+				</cac:RegistrationAddress>
+				<cac:TaxScheme> <!--Grupo de detalles tributarios del adquiriente [1..1] -->
+					<cbc:ID>01</cbc:ID> <!--Identificador del tributo del adquiriente tabla 13.2.6.2 [1..1]-->
+					<cbc:Name>IVA</cbc:Name> <!--Nombre del tributo abla 12.2.6.2[1..1]-->
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity> <!--Grupo de información legal del adquiriente [1..1] -->
+				<cbc:RegistrationName>NUEVA EPS</cbc:RegistrationName> <!--Nombre o Razón Social del adquiriente [1..1]-->
+				<cbc:CompanyID schemeAgencyID="195"
+				               schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)"
+				               schemeID=""
+				               schemeName="31">999999999</cbc:CompanyID> <!--Identificador del Adquiriente[1..1] + Debe ser informado el literal “195” [1..1]+ Debe ser informado el literal “CO, DIAN (Dirección de Impuestos y Aduanas Nacionales) [1..1] + DV del NIT del adquiriente[0..1]+ Identificador del tipo de documento de identidad tabla 13.2.1 [1..1] -->
+				<cac:CorporateRegistrationScheme> <!--Grupo de información de registro del adquiriente [0..1]-->
+					<cbc:ID>S905</cbc:ID> <!--[1..1] -->
+					<cbc:Name/> <!--Número de matrícula mercantil [0..1] -->
+				</cac:CorporateRegistrationScheme>
+			</cac:PartyLegalEntity>
+			<cac:Contact>
+				<cbc:Telephone>3214799225</cbc:Telephone> <!-- telefono de contacto [0..1] -->
+				<cbc:Telefax/> <!-- Número de teléfono, celular u otro [0..1] -->
+				<cbc:ElectronicMail>drogueria.soacha@colsubsidio.co</cbc:ElectronicMail> <!--Correo electrónico de contacto [1..1], debe estar alineado con el correo recepcion DIAN-->
+			</cac:Contact>
+		</cac:Party>
+	</cac:AccountingCustomerParty>
+	<cac:PaymentMeans> <!--Grupo de campos para información relacionadas con el pago de la factura. [1..N] -->
+		<cbc:ID schemeID="01">1</cbc:ID>  <!--Se debe colocar el atributo SchemeID indicando el método de pago [1,1] -->
+		<cbc:PaymentMeansCode>10</cbc:PaymentMeansCode> <!--Código correspondiente al medio de pago tabla 13.3.4.2 [1..1]-->
+		<cbc:PaymentDueDate>2023-09-11</cbc:PaymentDueDate> <!--Fecha de vencimiento de la factura, es obligatoria si cbc:ID = 2 (Pago a Crédito) [0..1]-->
+		<cbc:PaymentID>EFECTIVO</cbc:PaymentID> <!--Texto libre para informar datos adicionales sobre el medio de pago [0..1]-->
+	</cac:PaymentMeans>
+	 <cac:AllowanceCharge> <!--Grupo de campos para información relacionadas con el descuento comercial de la factura. [0..N] -->
+        <cbc:ID>1</cbc:ID> <!-- Número de descuento [1..1]-->
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator> <!-- identifica si es un cargo (true) ó un descuento (false) [1..1]-->
+        <cbc:AllowanceChargeReasonCode>01</cbc:AllowanceChargeReasonCode> <!-- Código para categorizar el descuento Tabla 13.3.8 [0..1] Solo para descuentos a nivel de factura -->
+        <cbc:AllowanceChargeReason>Descuento condicionado</cbc:AllowanceChargeReason> <!-- Texto libre para informar de la razón del descuento -->
+        <cbc:MultiplierFactorNumeric>1.00</cbc:MultiplierFactorNumeric> <!-- Porcentaje a aplicar en el descuento o cargo [1..1]-->
+        <cbc:Amount currencyID="COP">10.00</cbc:Amount> <!-- Valor total del cargo o descuento [1..1]-->
+        <cbc:BaseAmount currencyID="COP">1000.00</cbc:BaseAmount> <!-- Valor Base para calcular el descuento o el cargo [1..1]-->
+    </cac:AllowanceCharge>
+	<cac:TaxTotal> <!--Grupo de campos para información totales relacionadas con un tributo [0..N]-->
+		<cbc:TaxAmount currencyID="COP">0.00</cbc:TaxAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo [1..1]-->
+		<cac:TaxSubtotal> <!--Grupo de información que definen los valores del tributo [1..N]-->
+			<cbc:TaxableAmount currencyID="COP">3500.00</cbc:TaxableAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Base Imponible sobre la que se calcula el valor del tributo [1..1] -->
+			<cbc:TaxAmount currencyID="COP">0.00</cbc:TaxAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo: producto del porcentaje aplicado sobre la base imponible [1..1]-->
+			<cac:TaxCategory> <!--Grupo de información sobre el tributo [1..1]-->
+				<cbc:Percent>0.00</cbc:Percent> <!--Tarifa del tributo [0..1] -->
+				<cac:TaxScheme> <!--Grupo de información específicas sobre el tributo [1..1] -->
+					<cbc:ID>01</cbc:ID> <!--Identificador del tributo tabla 13.2.2 [1..1]-->
+					<cbc:Name>IVA</cbc:Name> <!-- Nombre del tributo tabla 13.2.2 [1..1]-->
+				</cac:TaxScheme> 
+			</cac:TaxCategory>
+		</cac:TaxSubtotal>
+	</cac:TaxTotal>
+	<cac:WithholdingTaxTotal> <!--Grupo de campos para información totales relacionadas con la retención [0..N]-->
+		<cbc:TaxAmount currencyID="COP">3000.00</cbc:TaxAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo [1..1]-->
+		<cac:TaxSubtotal> <!--Grupo de información que definen los valores del tributo [1..N]-->
+			<cbc:TaxableAmount currencyID="COP">60000.00</cbc:TaxableAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Base Imponible sobre la que se calcula el valor del tributo [1..1] -->
+			<cbc:TaxAmount currencyID="COP">3000.00</cbc:TaxAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo: producto del porcentaje aplicado sobre la base imponible [1..1]-->
+			<cac:TaxCategory> <!--Grupo de información sobre el tributo [1..1]-->
+				<cbc:Percent>5.00</cbc:Percent> <!--Tarifa del tributo [0..1] -->
+				<cac:TaxScheme> <!--Grupo de información específicas sobre el tributo [1..1] -->
+					<cbc:ID>06</cbc:ID> <!--Identificador del tributo tabla 13.2.2 [1..1]-->
+					<cbc:Name>RETEFUENTE</cbc:Name> <!-- Nombre del tributo tabla 13.2.2 [1..1]-->
+				</cac:TaxScheme> <!--Grupo de información específicas sobre el tributo [1..1] -->
+			</cac:TaxCategory> 
+		</cac:TaxSubtotal> 
+	</cac:WithholdingTaxTotal>
+	<cac:LegalMonetaryTotal> <!--Grupo de campos para información relacionadas con los valores totales aplicables a la factura [1..1]-->
+		<cbc:LineExtensionAmount currencyID="COP">100000.00</cbc:LineExtensionAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Total Valor Bruto antes de tributos: Total valor bruto, suma de los valores brutos de las líneas de la factura.[1..1]-->
+		<cbc:TaxExclusiveAmount currencyID="COP">100000.00</cbc:TaxExclusiveAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Total Valor Base Imponible : Base imponible para el cálculo de los tributos [1..1]-->
+		<cbc:TaxInclusiveAmount currencyID="COP">100000.00</cbc:TaxInclusiveAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Total de Valor Bruto más tributos [1..1]-->
+		<cbc:AllowanceTotalAmount currencyID="COP">0.00</cbc:AllowanceTotalAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Descuento Total: Suma de todos los descuentos aplicados a nivel de la factura [0..1] se envia si se genera el grupo AllowanceCharge a nivel de factura, ChargeIndicator = false-->
+		<cbc:ChargeTotalAmount currencyID="COP">0.00</cbc:ChargeTotalAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Cargo Total: Suma de todos los cargos aplicados a nivel de la factura [0..1] se envia si se genera el grupo AllowanceCharge a nivel de factura, ChargeIndicator = true-->
+		<cbc:PrepaidAmount currencyID="COP">10000.00</cbc:PrepaidAmount> <!--Valor Total a acreditar; número real[1..1] NO APLICA CALCULO SECTOR SALUD -->
+		<cbc:PayableRoundingAmount currencyID="COP">0.00</cbc:PayableRoundingAmount> <!--Se usa en caso de que haya diferencia entre los totales calculados y la suma de los parciales para el valor total de un documento-->
+		<cbc:PayableAmount currencyID="COP">100000.00</cbc:PayableAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor a Pagar de Factura: Valor total de ítems (incluyendo cargos y descuentos a nivel de ítems)+valor tributos + valor cargos – valor descuentos – valor anticipos [1..1]-->
+	</cac:LegalMonetaryTotal>
+	<cac:InvoiceLine>
+		<cbc:ID>1</cbc:ID> <!-- Número de Línea [1..1], si la factura es tipo mandato debe enviar el atributo @schemeID tabla 13.3.11. -->
+		<cbc:Note languageLocaleID="Nota1">Aqui va la nota</cbc:Note> <!-- Texto libre para añadir dinformacionadicional al articulo [0..N] -->
+		<cbc:InvoicedQuantity unitCode="94">1.00</cbc:InvoicedQuantity> <!-- Cantidad del producto o servicio [1..1] + Identificación de la unidad de medida tabla 13.3.6 -->
+		<cbc:LineExtensionAmount currencyID="COP">3500.00</cbc:LineExtensionAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor total de la línea. Cantidad x Precio Unidad menos descuentos más recargos que apliquen para la línea. [1..1]-->
+		<cac:AllowanceCharge> <!--Grupo de campos para información relacionadas con el descuento comercial de la factura. [0..N] -->
+			<cbc:ID>1</cbc:ID> <!-- Número de descuento [1..1]-->
+			<cbc:ChargeIndicator>false</cbc:ChargeIndicator> <!-- identifica si es un cargo (true) ó un descuento (false) [1..1]-->
+			<cbc:AllowanceChargeReason>Descuento no condicionado</cbc:AllowanceChargeReason> <!-- Texto libre para informar de la razón del descuento -->
+			<cbc:MultiplierFactorNumeric>1.00</cbc:MultiplierFactorNumeric> <!-- Porcentaje a aplicar en el descuento o cargo [1..1]-->
+			<cbc:Amount currencyID="COP">10.00</cbc:Amount> <!-- Valor total del cargo o descuento [1..1]-->
+			<cbc:BaseAmount currencyID="COP">1000.00</cbc:BaseAmount> <!-- Valor Base para calcular el descuento o el cargo [1..1]-->
+		</cac:AllowanceCharge>
+		<cac:TaxTotal> <!--Grupo de campos para información relacionadas con un tributo aplicable a esta línea de la factura [0..N]-->
+			<cbc:TaxAmount currencyID="COP">0.00</cbc:TaxAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + -->
+			<cac:TaxSubtotal> <!--Grupo de información que definen los valores del tributo [1..N]--> 
+				<cbc:TaxableAmount currencyID="COP">3500.00</cbc:TaxableAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Base Imponible sobre la que se calcula el valor del tributo [1..1]-->
+				<cbc:TaxAmount currencyID="COP">0.00</cbc:TaxAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo: producto del porcentaje aplicado sobre la base imponible [1..1]-->
+				<cac:TaxCategory> <!--Grupo de información sobre el tributo [1..1]-->
+					<cbc:Percent>0.00</cbc:Percent> <!--Tarifa del tributo [0..1]-->
+					<cac:TaxScheme> <!--Grupo de información específicas sobre el tributo [1..1] -->
+						<cbc:ID>01</cbc:ID> <!--Identificador del tributo tabla 13.2.2 [1..1]-->
+						<cbc:Name>IVA</cbc:Name> <!--Nombre del tributo tabla 13.2.2 [1..1]-->
+					</cac:TaxScheme>
+				</cac:TaxCategory>
+			</cac:TaxSubtotal>
+		</cac:TaxTotal>
+	  <cac:WithholdingTaxTotal> <!--Grupo de campos para información totales relacionadas con la retención [0..N]-->
+		<cbc:TaxAmount currencyID="COP">3000.00</cbc:TaxAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo [1..1]-->
+			<cac:TaxSubtotal> <!--Grupo de información que definen los valores del tributo [1..N]-->
+				<cbc:TaxableAmount currencyID="COP">60000.00</cbc:TaxableAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Base Imponible sobre la que se calcula el valor del tributo [1..1] -->
+				<cbc:TaxAmount currencyID="COP">3000.00</cbc:TaxAmount> <!-- Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del tributo: producto del porcentaje aplicado sobre la base imponible [1..1]-->
+				<cac:TaxCategory> <!--Grupo de información sobre el tributo [1..1]-->
+					<cbc:Percent>5.00</cbc:Percent> <!--Tarifa del tributo [0..1] -->
+					<cac:TaxScheme> <!--Grupo de información específicas sobre el tributo [1..1] -->
+						<cbc:ID>06</cbc:ID> <!--Identificador del tributo tabla 13.2.2 [1..1]-->
+						<cbc:Name>RETEFUENTE</cbc:Name> <!-- Nombre del tributo tabla 13.2.2 [1..1]-->
+					</cac:TaxScheme> <!--Grupo de información específicas sobre el tributo [1..1] -->
+				</cac:TaxCategory> 
+			</cac:TaxSubtotal> 
+		</cac:WithholdingTaxTotal>
+		<cac:Item> <!-- Línea de producto que se factura [1..1] -->
+			<cbc:Description>Cirugía ambulatoria</cbc:Description> <!-- Descripción del artículo o sercicio a que se refiere esta linea de factura [1..3] -->
+			<cac:SellersItemIdentification><!-- Grupos de datos de identificación del artículo o servicio [0..1] -->
+				<cbc:ID>AOHV84-225</cbc:ID> <!-- Código del vendedor correspondiente al artículo [0..1] -->
+			</cac:SellersItemIdentification>
+			<cac:StandardItemIdentification> <!--Grupo de datos de identificación del artículo o servicio de acuerdo con un estándar [1..1] -->
+				<cbc:ID schemeID="999" schemeName="Estándar de adopción del contribuyente">6543542313534</cbc:ID> <!--Código del estándar [1..1] + Código de acuerdo con el estándar descrito en el atributo ID/@schemeAgencyID [1..1] -->
+			</cac:StandardItemIdentification>
+		</cac:Item>
+		<cac:Price> <!--Grupo de información que describen los precios del artículo o servicio [1..1] -->
+			<cbc:PriceAmount currencyID="COP">100000.00</cbc:PriceAmount> <!--Código de moneda de la transacción tabla 13.3.3 [1..1] + Valor del artículo o servicio [1..1]-->
+			<cbc:BaseQuantity unitCode="EA">1.00</cbc:BaseQuantity> <!-- La cantidad real sobre la cual el precio aplica [1..1]-->
+		</cac:Price>
+	</cac:InvoiceLine>
+</Invoice>
