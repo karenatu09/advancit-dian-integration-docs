@@ -100,6 +100,13 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Contraseña del certificado         | PASCER   | abc1234XYZ                    | CHAR(16)         |                                                        | NO     |
 | Clave técnica                      | TECKEY   | a1b2c3d4e5f67890abcdef1234567890 | CHAR(40) |                                                      | NO     |
 | Tesid                              | TESIDE   | aabbccdd-eeff-1122-3344-556677889900 | CHAR(36) |                                                    | NO     |
+| Departamento Empresa               | DEPEMP   | 68 					| CHAR(36) | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.9.2 Departamentos (ISO 3166-2:CO): cbc:CountrySubentity, cbc:CountrySubentityCode)   | NO     |
+| Ciudad Empresa                     | CIUEMP   | 77068276				| CHAR(36) | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.9.3 Municipios: cbc:CityName) | NO     |
+| ID de Registro 		     | REGID   	|  					| CHAR(36) |                                                    | NO     |
+| Registro Nombre                    | REGNAM   |  					| CHAR(36) |                                                    | NO     |
+
+NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
+
 ##### **Ejemplo de DATOEMP**
 ```json
 
@@ -128,7 +135,11 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
       "CERTIF": "CertificadoFicticio.p12",
       "PASCER": "abc1234XYZ",
       "TECKEY": "a1b2c3d4e5f67890abcdef1234567890",
-      "TESIDE": "aabbccdd-eeff-1122-3344-556677889900"
+      "TESIDE": "aabbccdd-eeff-1122-3344-556677889900",
+      "DEPEMP": "68",
+      "CIUEMP": "77068276",
+      "REGID": "",
+      "REGNAM": ""
     }
   ]
 }
@@ -355,6 +366,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Porcentaje del impuesto            | PORIMD   | 19.00            | DEC(15,2)       |                                                          | SI     |
 | Código del impuesto                | CODIMD   | 01               | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)  | SI     |
 | Nombre del impuesto                | NOMIMD   | IVA              | CHAR(255)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)                     | SI     |
+| Descuento aplicable Salud A        | DESSAA   |       	   | CHAR(255)       |                     	| NO     |
+| Descuento aplicable Salud B        | DESSAB   | 	           | CHAR(255)       |                    	| NO     |
+
 
 
 ##### **Ejemplo de DETDOC**
@@ -374,7 +388,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"VALDED": "36000.00",
 			"PORIMD": "0.00",
 			"CODIMD": "ZY",
-			"NOMIMD": "No causa"
+			"NOMIMD": "No causa",
+			"DESSAA": "",
+			"DESSAB": ""
 		},
 		{
 			"IDEPOS": 2,
@@ -388,7 +404,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"VALDED": "10440.00",
 			"PORIMD": "0.00",
 			"CODIMD": "ZY",
-			"NOMIMD": "No causa"
+			"NOMIMD": "No causa",
+			"DESSAA": "",
+			"DESSAB": ""
 		},
 		{
 			"IDEPOS": 3,
@@ -402,7 +420,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"VALDED": "5440.00",
 			"PORIMD": "0.00",
 			"CODIMD": "ZY",
-			"NOMIMD": "No causa"
+			"NOMIMD": "No causa",
+			"DESSAA": "",
+			"DESSAB": ""
 		}
 	]
 }
@@ -563,7 +583,7 @@ Los objetos que conforman este arreglo están descritos en la siguiente tabla:
 
 | **Descripción**                  | **Nombre**                   | **Ejemplo**           | **Especificación** | **Nota**                                                | **Obligatorio** |
 |----------------------------------|------------------------------|-----------------------|--------------------|---------------------------------------------------------|-----------------|
-| Código del prestador             | `IDEPOS`                    | `6541324642159`       | varchar(150)               | Identificador único del prestador de servicios.         | Sí              |
+| Código del prestador             | `CODIGO_PRESTADOR`                    | `6541324642159`       | varchar(150)               | Identificador único del prestador de servicios.         | Sí              |
 | Modalidad de pago                | `MODALIDAD_PAGO`            | `11`                 | varchar(150)           | Ver tabla LINEAMIENTOS PARA LA GENERACIÓN, VALIDACIÓN Y ENVÍO DEL REGISTRO INDIVIDUAL DE PRESTACION DE SERVICIOS DE SALUD – RIPS, COMO SOPORTE DE LA FACTURA ELECTRÓNICA DE VENTA – FEV EN SALUD (Tabla 2: Accesos directos a las tablas de FEV-RIPS - TB 38)                    | Sí              |
 | Cobertura del plan de beneficios | `COBERTURA_PLAN_BENEFICIOS` | `01`                 | varchar(150)	     |  Ver tabla LINEAMIENTOS PARA LA GENERACIÓN, VALIDACIÓN Y ENVÍO DEL REGISTRO INDIVIDUAL DE PRESTACION DE SERVICIOS DE SALUD – RIPS, COMO SOPORTE DE LA FACTURA ELECTRÓNICA DE VENTA – FEV EN SALUD (Tabla 2: Accesos directos a las tablas de FEV-RIPS - TB 36) | No              |
 | Número del contrato              | `NUMERO_CONTRATO`           | `632656-5416`         | varchar(150)          | Referencia única del contrato del servicio.             | No              |
