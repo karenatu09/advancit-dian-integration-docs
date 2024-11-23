@@ -193,8 +193,8 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Clave						| CLAVE    |                   | CHAR(30)       |                                                 | SI     |
 | Indicador de prestación de servicios desde	| INPESD   |                   | varchar(100)	|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
 | Indicador de prestación de servicios hasta	| INPEST   |                   | varchar(100)	| Hora de inicio del periodo de prestación de servicios.                                       | Sí              |
-| Indicador de periodo de la entrega	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                      |No              | 
-| Indicador de periodo de entrada		| INPENT   |                   | varchar(100)	| Hora de finalización del periodo de prestación de servicios.                         |No              |
+| Indicador de periodo de la entrega	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                      | Sí              | 
+| Indicador de periodo de entrada		| INPENT   |                   | varchar(100)	| Hora de finalización del periodo de prestación de servicios.                         | Sí              |
 | Identificador del análisis del recurso	| ANDREID  |                   | Alfanumérico      |  Código único que identifica un análisis del recurso utilizado o entregado.                         |No              |
 | Datos del análisis del recurso		| ANDREDA  |                   | Texto             |  Información específica relacionada con el análisis del recurso.                                     |No              |
 | Fecha del análisis del recurso		| ANDREDT  |                   | Fecha (YYYY-MM-DD)| Fecha en la que se realizó el análisis del recurso.                                                 | No              |
