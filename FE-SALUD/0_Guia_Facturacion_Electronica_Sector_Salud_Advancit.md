@@ -629,10 +629,10 @@ A continuación, se presenta un ejemplo de cómo estructurar los datos en format
 ## Campos de Pago Previo (PREPAI)
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
-| Código del tipo de pago            | PRECOD   | 01               | CHAR(2)         | Código del tipo de pago (ej. "01" para copago).          | SI     |
-| Nombre del tipo de pago            | PRENOM   | Copago           | CHAR(50)        | Nombre del tipo de pago.                                 | SI     |
-| Valor del pago                     | PREVAL   | 6900.00          | DEC(15,2)       | Valor del pago realizado.                                | SI     |
-| Fecha del pago                     | PREFEC   | 2024-09-06       | DATE            | Fecha en que se realizó el pago.                         | SI     |
+| Código del tipo de pago            | PRECOD   | 01               | varchar(150)         | Código del tipo de pago (ej. "01" para copago).          | SI     |
+| Nombre del tipo de pago            | PRENOM   | Copago           | varchar(150)        | Nombre del tipo de pago.                                 | SI     |
+| Valor del pago                     | PREVAL   | 6900.00          | varchar(150)       | Valor del pago realizado.                                | SI     |
+| Fecha del pago                     | PREFEC   | 2024-09-06       | varchar(150)            | Fecha en que se realizó el pago.                         | SI     |
 
 ##### **Ejemplo de PREPAI**
 
