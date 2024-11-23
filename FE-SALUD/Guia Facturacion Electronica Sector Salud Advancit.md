@@ -187,10 +187,11 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Cantidad de cigarrillos sin nicotina		| CIGSHN   |                   | Numérico          | Número de cigarrillos sin nicotina entregados o facturados.                                         | No              |
 | Cantidad de cigarrillos con nicotina		| CIGCSH   |                   | Numérico          | Número de cigarrillos con nicotina entregados o facturados.                                         | No              |
 | Impuesto sobre turismos diarios		| IPTURD   |                   | Numérico          | Valor del impuesto sobre turismos aplicable por día, si corresponde.                                | No              |
-| Identificador de preparación			| PREPID   |                   | Numérico          | Código único que identifica el proceso de preparación del documento o servicio.                     | Sí              |
+| Identificador de preparación			| PREPID   |                   | Numérico          | Código único que identifica el proceso de preparación del documento o servicio.                     | NO              |
 | Monto de preparación				| PREPAM   |                   | Numérico          | Valor monetario asociado al costo de preparación de los bienes o servicios.                        | No              |
 | Descuento por preparación			| PREDRE   |                   | Numérico          | Valor del descuento aplicado al costo de preparación de los bienes o servicios.                    | No              |
 
+NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
 
 ##### **Ejemplo de CABDOC**
 
@@ -263,6 +264,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 
+
 ## Campos de Datos del Cliente (CLIDOC)
 | Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
 |------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
@@ -290,6 +292,8 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Obligaciones o responsabilidades   | OBLCON   | O-09             | CHAR(200)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.6 Responsabilidades fiscales)     | SI     |
 | Identificador del registro	     | REGID    |                  | Alfanumérico | Código único que identifica el registro del cliente en el sistema. | Sí              |
 | Nombre del registro		     | REGNAM   |                  | Texto        | Nombre o descripción oficial asociada al registro del cliente.      | Sí              |
+
+NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
 
 ##### **Ejemplo de CLIDOC**
 
@@ -343,6 +347,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Porcentaje del impuesto            | PORIMD   | 19.00            | DEC(15,2)       |                                                          | SI     |
 | Código del impuesto                | CODIMD   | 01               | CHAR(2)         | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)  | SI     |
 | Nombre del impuesto                | NOMIMD   | IVA              | CHAR(255)       | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.7.2 Tributos)                     | SI     |
+
 
 ##### **Ejemplo de DETDOC**
 
@@ -503,8 +508,6 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Valor del producto                 | VAPODP   | 10000.00         | DEC(15,2)       | Valor del producto.                                      | SI     |
 | Porcentaje del producto            | POPODP   | 19.00            | DEC(15,2)       | Porcentaje aplicado al producto.                         | SI     |
 
-
-
 ##### **Ejemplo de DETALLEPRO**
 
 ```json
@@ -542,48 +545,46 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 
 ## Campos de Datos de Salud (DATSAL)
+
+Para los campos adicionales solicitado para el sector salud se definio un arreglo el cual contiene los casos comprendidos como el codigo del prestador, la modalidad de pago, la cobertura del plan de beneficios, etc. para esto se ha definio un arreglo el cual consta de un objeto que tiene como campos DASNAM y DASVAL, siendo DASNAM el nombre de los datos de salud y DASVAL el valor de ese dato, los objetos que iran estan definidos en la siguiente tabla:
+
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
-| Consecutivo de detalle de productos | IDEPOS   | 1                | INT(6)          | Consecutivo de productos en el documento.                | SI     |
-| Código de producto                 | CODITE   | 123456789        | CHAR(40)        | Código del producto en el detalle.                       | SI     |
-| Código de posición del producto    | COPODP   | 01               | CHAR(2)         | Código de la posición del producto.                      | NO     |
-| Nombre de la posición del producto | NOPODP   | Producto A       | CHAR(200)       | Nombre asignado a la posición del producto.              | NO     |
-| Valor del producto                 | VAPODP   | 10000.00         | DEC(15,2)       | Valor del producto.                                      | SI     |
-| Porcentaje del producto            | POPODP   | 19.00            | DEC(15,2)       | Porcentaje aplicado al producto.                         | SI     |
+| Codigo del prestador | IDEPOS   | CODIGO_PRESTADOR             | CHAR          | Consecutivo de productos en el documento.                	| SI     |
+| Modalidad de Pago                 | MODALIDAD_PAGO   | 123456789        | CHAR(40)        | Código del producto en el detalle.		| SI     |
+| cobertura del plan de beneficios    | COBERTURA_PLAN_BENEFICIOS   | 01               | CHAR(2)         | Código de la posición del producto.	| NO     |
+| Numero del contrato | NUMERO_CONTRATO   | Producto A       | CHAR(200)       | Nombre asignado a la posición del producto.			| NO     |
+| Numero de Poliza                 | NUMERO_POLIZA   | 10000.00         | DEC(15,2)       | Valor del producto.					| SI     |
 
-
+Un ejemplo de esto seria el siguiente codigo
 
 ##### **Ejemplo de DETALLEPRO**
 
 ```json
 {
-	"DETALLEPRO": [
+	"DATSAL": [
 		{
-			"IDEPOS": 1,
-			"CODITE": "123456",
-			"COPODP": "ZY",
-			"NOPODP": "No causa",
-			"VAPODP": "264000.00",
-			"POPODP": "0.00"
+			"DASNAM": "CODIGO_PRESTADOR",
+			"DASVAL": "6541324642159"
 		},
 		{
-			"IDEPOS": 2,
-			"CODITE": "654321",
-			"COPODP": "ZY",
-			"NOPODP": "No causa",
-			"VAPODP": "74560.00",
-			"POPODP": "0.00"
+			"DASNAM": "MODALIDAD_PAGO",
+			"DASVAL": "11"
 		},
 		{
-			"IDEPOS": 3,
-			"CODITE": "789012",
-			"COPODP": "ZY",
-			"NOPODP": "No causa",
-			"VAPODP": "39560.00",
-			"POPODP": "0.00"
+			"DASNAM": "COBERTURA_PLAN_BENEFICIOS",
+			"DASVAL": "01"
+		},
+		{
+			"DASNAM": "NUMERO_CONTRATO",
+			"DASVAL": "632656-5416"
+		},
+		{
+			"DASNAM": "NUMERO_POLIZA",
+			"DASVAL": ""
 		}
 	]
-}
+
 
 ```
 
