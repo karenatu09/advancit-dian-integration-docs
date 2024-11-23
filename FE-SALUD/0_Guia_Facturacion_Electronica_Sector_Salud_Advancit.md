@@ -889,5 +889,6 @@ La DIAN proporciona una serie de recursos y herramientas técnicas que apoyan el
 
 - [Resolución 1884 de 2024: Un Vistazo a los Cambios en el Sector Salud Colombiano](https://www.minsalud.gov.co/Normatividad_Nuevo/Resoluci%C3%B3n%20No%201884%20de%202024.pdf)
 - [Modificaciones Resolución 636 de 2024: Factura RIPS](https://www.minsalud.gov.co/Normatividad_Nuevo/Resoluci%C3%B3n%20No%20636%20de%202024.pdf)
+- [LINEAMIENTOS PARA LA GENERACIÓN, VALIDACIÓN Y ENVÍO DEL REGISTRO INDIVIDUAL DE PRESTACION DE SERVICIOS DE SALUD – RIPS, COMO SOPORTE DE LA FACTURA ELECTRÓNICA DE VENTA – FEV EN SALUD](https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/OT/lineamientos-generacion-validacion-rips-factura-electronica-fev-doc-electronicos.pdf)
 
 ---
