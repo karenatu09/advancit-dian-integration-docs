@@ -546,49 +546,178 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 
 ## Campos de Datos de Salud (DATSAL)
 
-Para los campos adicionales solicitado para el sector salud se definio un arreglo el cual contiene los casos comprendidos como el codigo del prestador, la modalidad de pago, la cobertura del plan de beneficios, etc. para esto se ha definio un arreglo el cual consta de un objeto que tiene como campos DASNAM y DASVAL, siendo DASNAM el nombre de los datos de salud y DASVAL el valor de ese dato, los objetos que iran estan definidos en la siguiente tabla:
+Para el sector salud, se ha definido un arreglo que contiene información adicional requerida, como el código del prestador, la modalidad de pago, la cobertura del plan de beneficios, entre otros. Este arreglo incluye objetos con dos campos principales: 
 
-| Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
-|------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
-| Codigo del prestador | IDEPOS   | CODIGO_PRESTADOR             | CHAR          | Consecutivo de productos en el documento.                	| SI     |
-| Modalidad de Pago                 | MODALIDAD_PAGO   | 123456789        | CHAR(40)        | Código del producto en el detalle.		| SI     |
-| cobertura del plan de beneficios    | COBERTURA_PLAN_BENEFICIOS   | 01               | CHAR(2)         | Código de la posición del producto.	| NO     |
-| Numero del contrato | NUMERO_CONTRATO   | Producto A       | CHAR(200)       | Nombre asignado a la posición del producto.			| NO     |
-| Numero de Poliza                 | NUMERO_POLIZA   | 10000.00         | DEC(15,2)       | Valor del producto.					| SI     |
+- **DASNAM**: Nombre del dato de salud.
+- **DASVAL**: Valor correspondiente al dato.
 
-Un ejemplo de esto seria el siguiente codigo
+Los objetos que conforman este arreglo están descritos en la siguiente tabla:
 
-##### **Ejemplo de DETALLEPRO**
+| **Descripción**                  | **Nombre**                   | **Ejemplo**           | **Especificación** | **Nota**                                                | **Obligatorio** |
+|----------------------------------|------------------------------|-----------------------|--------------------|---------------------------------------------------------|-----------------|
+| Código del prestador             | `IDEPOS`                    | `6541324642159`       | varchar(150)               | Identificador único del prestador de servicios.         | Sí              |
+| Modalidad de pago                | `MODALIDAD_PAGO`            | `11`                 | varchar(150)           | Tipo de modalidad de pago utilizado.                    | Sí              |
+| Cobertura del plan de beneficios | `COBERTURA_PLAN_BENEFICIOS` | `01`                 | varchar(150)	     | Identifica la cobertura específica del plan de salud.   | No              |
+| Número del contrato              | `NUMERO_CONTRATO`           | `632656-5416`         | varchar(150)          | Referencia única del contrato del servicio.             | No              |
+| Número de póliza                 | `NUMERO_POLIZA`             | `10000.00`            | varchar(150)          | Monto asociado a la póliza del beneficiario.            | Sí              |
+
+---
+
+### Ejemplo de estructura JSON
+
+A continuación, se presenta un ejemplo de cómo estructurar los datos en formato JSON:
 
 ```json
 {
-	"DATSAL": [
-		{
-			"DASNAM": "CODIGO_PRESTADOR",
-			"DASVAL": "6541324642159"
-		},
-		{
-			"DASNAM": "MODALIDAD_PAGO",
-			"DASVAL": "11"
-		},
-		{
-			"DASNAM": "COBERTURA_PLAN_BENEFICIOS",
-			"DASVAL": "01"
-		},
-		{
-			"DASNAM": "NUMERO_CONTRATO",
-			"DASVAL": "632656-5416"
-		},
-		{
-			"DASNAM": "NUMERO_POLIZA",
-			"DASVAL": ""
-		}
-	]
-
-
+  "DATSAL": [
+    {
+      "DASNAM": "CODIGO_PRESTADOR",
+      "DASVAL": "6541324642159"
+    },
+    {
+      "DASNAM": "MODALIDAD_PAGO",
+      "DASVAL": "11"
+    },
+    {
+      "DASNAM": "COBERTURA_PLAN_BENEFICIOS",
+      "DASVAL": "01"
+    },
+    {
+      "DASNAM": "NUMERO_CONTRATO",
+      "DASVAL": "632656-5416"
+    },
+    {
+      "DASNAM": "NUMERO_POLIZA",
+      "DASVAL": "656565"
+    }
+  ]
+}
 ```
 
-Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+## Campos de Datos de Salud (DATSAL)
+
+Para el sector salud, se ha definido un arreglo que contiene información adicional requerida, como el código del prestador, la modalidad de pago, la cobertura del plan de beneficios, entre otros. Este arreglo incluye objetos con dos campos principales: 
+
+- **DASNAM**: Nombre del dato de salud.
+- **DASVAL**: Valor correspondiente al dato.
+
+Los objetos que conforman este arreglo están descritos en la siguiente tabla:
+
+| **Descripción**                  | **Nombre**                   | **Ejemplo**           | **Especificación** | **Nota**                                                | **Obligatorio** |
+|----------------------------------|------------------------------|-----------------------|--------------------|---------------------------------------------------------|-----------------|
+| Código del prestador             | `IDEPOS`                    | `6541324642159`       | varchar(150)               | Identificador único del prestador de servicios.         | Sí              |
+| Modalidad de pago                | `MODALIDAD_PAGO`            | `11`                 | varchar(150)           | Tipo de modalidad de pago utilizado.                    | Sí              |
+| Cobertura del plan de beneficios | `COBERTURA_PLAN_BENEFICIOS` | `01`                 | varchar(150)	     | Identifica la cobertura específica del plan de salud.   | No              |
+| Número del contrato              | `NUMERO_CONTRATO`           | `632656-5416`         | varchar(150)          | Referencia única del contrato del servicio.             | No              |
+| Número de póliza                 | `NUMERO_POLIZA`             | `10000.00`            | varchar(150)          | Monto asociado a la póliza del beneficiario.            | Sí              |
+
+---
+
+### Ejemplo de estructura JSON
+
+A continuación, se presenta un ejemplo de cómo estructurar los datos en formato JSON:
+
+```json
+{
+  "DATSAL": [
+    {
+      "DASNAM": "CODIGO_PRESTADOR",
+      "DASVAL": "6541324642159"
+    },
+    {
+      "DASNAM": "MODALIDAD_PAGO",
+      "DASVAL": "11"
+    },
+    {
+      "DASNAM": "COBERTURA_PLAN_BENEFICIOS",
+      "DASVAL": "01"
+    },
+    {
+      "DASNAM": "NUMERO_CONTRATO",
+      "DASVAL": "632656-5416"
+    },
+    {
+      "DASNAM": "NUMERO_POLIZA",
+      "DASVAL": "656565"
+    }
+  ]
+}
+```
+### Notas importantes:
+1. Este JSON debe codificarse en **Base64** antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+2. Todos los campos obligatorios deben estar presentes para garantizar el cumplimiento de las especificaciones.
+
+## Campos de Datos de Salud - Información de Archivos (PURSAL)
+
+En esta sección se detalla la estructura para los datos asociados a archivos relevantes dentro del proceso de facturación electrónica en el sector salud. 
+
+### Notas importantes:
+1. Todos los campos de este JSON son **obligatorios** y deben estar correctamente diligenciados.
+2. Los valores deben seguir el formato especificado en la tabla para garantizar su validez.
+3. Este JSON se debe incluir en la solicitud en el formato indicado, codificado en **Base64** antes de su inserción en el XML SOAP.
+
+### Estructura de los campos:
+
+| **Descripción**                  | **Nombre**   | **Ejemplo**       | **Especificación** | **Nota**                                            | **Obligatorio** |
+|----------------------------------|--------------|-------------------|--------------------|---------------------------------------------------|-----------------|
+| Nombre del archivo               | `PAGNAM`     | `excelFile`       | CHAR               | Identificador del archivo relacionado.            | Sí              |
+| Valor del archivo (nombre real)  | `PAGVAL`     | `a1b2c3.xlsx`     | CHAR               | Nombre del archivo con su extensión.             | Sí              |
+
+---
+
+### Ejemplo de estructura JSON
+
+```json
+{
+  "PURSAL": [
+    {
+      "PAGNAM": "excelFile",
+      "PAGVAL": "a1b2c3.xlsx"
+    }
+  ]
+}
+```
+
+### Instrucciones adicionales:
+1. Este JSON debe codificarse en **Base64** antes de ser incluido en el XML SOAP correspondiente.
+2. Asegúrate de que todos los campos cumplen con las especificaciones para evitar errores en el procesamiento.
+
+3. 
+## Campos de Datos de Salud - Información Adicional de Archivos (PUESAL)
+
+Esta sección describe la estructura de los datos relacionados con archivos adicionales que deben incluirse en los procesos de facturación electrónica para el sector salud.  
+
+### Notas importantes:
+1. Los campos de este JSON son **obligatorios** y deben llenarse de acuerdo con las especificaciones indicadas.
+2. Es fundamental garantizar que todos los valores cumplan con los formatos esperados para evitar errores durante el procesamiento.
+3. Este JSON debe ser codificado en **Base64** antes de su incorporación al XML SOAP.
+
+### Estructura de los campos:
+
+| **Descripción**                  | **Nombre**   | **Ejemplo**       | **Especificación** | **Nota**                                            | **Obligatorio** |
+|----------------------------------|--------------|-------------------|--------------------|---------------------------------------------------|-----------------|
+| Nombre del archivo               | `PAGNAM`     | `excelFile`       | CHAR               | Identificador descriptivo del archivo adjunto.    | Sí              |
+| Valor del archivo (nombre real)  | `PAGVAL`     | `a1b2c3.xlsx`     | CHAR               | Nombre del archivo incluyendo su extensión.       | Sí              |
+
+---
+
+### Ejemplo de estructura JSON
+
+```json
+{
+  "PUESAL": [
+    {
+      "PAGNAM": "excelFile",
+      "PAGVAL": "a1b2c3.xlsx"
+    }
+  ]
+}
+```
+
+### Instrucciones adicionales:
+1. El JSON debe codificarse en **Base64** para su inclusión en el XML SOAP correspondiente.
+2. Verifica que los nombres de los archivos sean únicos y descriptivos para facilitar la identificación.
+
 
 ### **Paso 3: Envío de la Petición**
 Una vez construida la petición, se puede enviar utilizando una librería SOAP en PHP, por ejemplo:
