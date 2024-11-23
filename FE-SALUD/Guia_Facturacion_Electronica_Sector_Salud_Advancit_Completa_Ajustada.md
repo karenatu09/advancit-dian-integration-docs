@@ -1,4 +1,3 @@
-
 # Manual de Desarrollo para Consumo de Webservice
 
 ## 1. **Introducción**
@@ -10,50 +9,6 @@ La comunicación con el servicio se realiza mediante una petición SOAP que incl
 - **URL del WSDL**: 
   - **Pruebas**: Permite realizar pruebas infinitas sin repercusión. URL: `http://pruebas.url.wsdl`
   - **Producción**: URL para operaciones reales: `http://produccion.url.wsdl`
-- Implementar la seguridad requerida, como certificados digitales si aplica.
-- Uso de la librería SOAP en PHP (u otro lenguaje que soporte SOAP).
-
-## 5. **Relación entre las Cabeceras del XML y los Datos JSON**
-
-El cuerpo de la petición SOAP incluye un bloque `<sendoc>` que contiene varios ítems donde cada uno tiene una clave (`key`) 
-en el XML y un valor (`value`) que corresponde a un conjunto de datos JSON codificado en BASE64. 
-A continuación, se describe la relación entre los nombres de las cabeceras XML y los datos JSON:
-
-| **Nombre en XML** | **Nombre en JSON** | **Descripción**                                      |
-|-------------------|--------------------|------------------------------------------------------|
-| `secado`          | `CABDOC`           | Información de la cabecera del documento (factura)   |
-| `secldo`          | `CLIDOC`           | Información del cliente                              |
-| `sededo`          | `DETDOC`           | Detalle de los productos o ítems del documento       |
-| `sedepr`          | `DETALLEPRO`       | Detalle del producto adicional                       |
-| `sedeim`          | `DETIMPDOC`        | Detalle de los impuestos aplicados                   |
-| `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
-| `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
-|                   | `DATSAL`           | Información adicional relacionada con los ítems      |
-|                   | `PURSAL`           | Datos relacionados con archivos                     |
-|                   | `PUESAL`           | Datos relacionados con archivos adicionales          |
-
-## Escenarios de Envío
-
-Existen 4 tipos de envíos que determinan los campos obligatorios dependiendo del tipo de operación. Los escenarios son:
-
-1. **SS Recaudo**: Archivo `SSCUFE_PN_Comentado`.
-2. **SS-SinAporte**: Archivo `IPSA ERP_Comentado`.
-3. **Acreditación**: Archivo `SSCUFE_IPS A EPS_Comentado`.
-4. **No Acreditación**: Archivo `SS-Reporte_SIN RECAU_Comentado`.
-
-Los archivos están disponibles en el directorio del repositorio.
-
----
-
-# Manual de Desarrollo para Consumo de Webservice
-
-## 1. **Introducción**
-Este documento técnico describe cómo los desarrolladores deben consumir el Web Service de facturación electrónica, el cual permite enviar documentos a la DIAN para su validación previa, mediante el método `send_document`. La comunicación con el servicio se realiza mediante una petición SOAP que incluye información en formato JSON encriptado en base64.
-
-### **Requisitos previos**
-Para integrar con este servicio, los desarrolladores deben tener en cuenta lo siguiente:
-- **URL del WSDL**: `http://mff.advancit.co/facturaelectronicav2/ws_electronic_invoice_basic.wsdl`
-- El servicio requiere enviar los datos en formato JSON, codificados en base64.
 - Implementar la seguridad requerida, como certificados digitales si aplica.
 - Uso de la librería SOAP en PHP (u otro lenguaje que soporte SOAP).
 
@@ -791,7 +746,10 @@ Si ocurre un error, es necesario manejar las excepciones de SOAP y analizar el c
 - **Errores de conexión**: Verifica la conectividad con el servicio y que la URL del WSDL esté accesible.
 
 ## 5. **Relación entre las Cabeceras del XML y los Datos JSON**
-El cuerpo de la petición SOAP incluye un bloque `<sendoc>` que contiene varios ítems donde cada uno tiene una clave (key) en el XML y un valor (value) que corresponde a un conjunto de datos JSON codificado en BASE64. A continuación, se describe la relación entre los nombres de las cabeceras XML y los datos JSON:
+
+El cuerpo de la petición SOAP incluye un bloque `<sendoc>` que contiene varios ítems donde cada uno tiene una clave (`key`) 
+en el XML y un valor (`value`) que corresponde a un conjunto de datos JSON codificado en BASE64. 
+A continuación, se describe la relación entre los nombres de las cabeceras XML y los datos JSON:
 
 #### **Formato General de la Relación XML-JSON**
 Cada bloque en el XML tiene la siguiente estructura:
@@ -803,8 +761,6 @@ Cada bloque en el XML tiene la siguiente estructura:
 ```
 Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON que contiene la información relevante.
 
-#### **Relación de Campos:**
-
 | **Nombre en XML** | **Nombre en JSON** | **Descripción**                                      |
 |-------------------|--------------------|------------------------------------------------------|
 | `secado`          | `CABDOC`           | Información de la cabecera del documento (factura)   |
@@ -814,9 +770,9 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 | `sedeim`          | `DETIMPDOC`        | Detalle de los impuestos aplicados                   |
 | `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
 | `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
-| `datsal`          | `DATSAL`           | Información adicional relacionada con los ítems      |
-| `pursal`          | `PURSAL`           | Datos adicionales de archivos, como anexos          	|
-| `prepai`          | `PREPAI`           | Información relacionada con el pago                  |
+|                   | `DATSAL`           | Información adicional relacionada con los ítems      |
+|                   | `PURSAL`           | Datos relacionados con archivos                     |
+|                   | `PUESAL`           | Datos relacionados con archivos adicionales          |
 
 
 ## 6. **Ejemplos Prácticos**
@@ -894,16 +850,27 @@ En este ejemplo, cada campo dentro del XML (`secado`, `secldo`, `sededo`, etc.) 
 
 ---
 
-### **7. Documentación Relacionada**
+### **7. Escenarios de Envío**
+
+Existen 4 tipos de envíos que determinan los campos obligatorios dependiendo del tipo de operación. Los escenarios son:
+
+1. **SS Recaudo**: Archivo `SSCUFE_PN_Comentado`.
+2. **SS-SinAporte**: Archivo `IPSA ERP_Comentado`.
+3. **Acreditación**: Archivo `SSCUFE_IPS A EPS_Comentado`.
+4. **No Acreditación**: Archivo `SS-Reporte_SIN RECAU_Comentado`.
+
+Los archivos están disponibles en el directorio del repositorio.
+
+### **8. Documentación Relacionada**
 
 Para cumplir con los requisitos técnicos y normativos de la facturación electrónica en Colombia, es importante consultar la documentación oficial proporcionada por la DIAN. A continuación, se incluyen enlaces a los documentos clave y herramientas que son referenciados a lo largo de este manual:
 
-#### **7.1. Documentación Oficial de la DIAN**
+#### **8.1. Documentación Oficial de la DIAN**
 Este documento detalla las especificaciones técnicas para la implementación de la facturación electrónica de acuerdo con las normativas vigentes en Colombia:
 
 - [Anexo Técnico Factura Electrónica de Venta - Versión 1.9](https://www.dian.gov.co/impuestos/factura-electronica/Documents/Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf)
 
-#### **7.2. Caja de Herramientas Técnica**
+#### **8.2. Caja de Herramientas Técnica**
 La DIAN proporciona una serie de recursos y herramientas técnicas que apoyan el proceso de integración de la facturación electrónica. Estos recursos incluyen documentación técnica adicional, ejemplos, y herramientas de validación:
 
 - [Caja de Herramientas Técnica - Sistema de Facturación Electrónica](https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/documentacion-tecnica/)
