@@ -7,8 +7,8 @@ La comunicación con el servicio se realiza mediante una petición SOAP que incl
 
 ### **Requisitos previos**
 - **URL del WSDL**: 
-  - **Pruebas**: Permite realizar pruebas infinitas sin repercusión. URL: `http://pruebas.url.wsdl`
-  - **Producción**: URL para operaciones reales: `http://produccion.url.wsdl`
+  - **Pruebas**: Permite realizar pruebas infinitas sin repercusión. URL: `[http://pruebas.url.wsdl](https://mff.advancit.co/facturaelectronicav2/ws_electronic_invoice_salud_v2.wsdl)`
+  - **Producción**: URL para operaciones reales: `por definir`
 - Implementar la seguridad requerida, como certificados digitales si aplica.
 - Uso de la librería SOAP en PHP (u otro lenguaje que soporte SOAP).
 
@@ -176,7 +176,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Total de impuestos                 		| TOTIMP   | 8781.42          | DEC(15,2)      | Multiplicación de SUBTOT por el porcentaje de impuestos. | SI     |
 | Valor total de descuentos          		| TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
 | Días para realizar el pago         		| DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
-| Tipo de operación                  		| TIPOPE   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.1 Documento Invoice – Factura electrónica)         | SI     |
+| Tipo de operación                  		| TIPOPE   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.5.1 Documento Invoice – Factura electrónica) o  Ver tabla LINEAMIENTOS PARA LA GENERACIÓN, VALIDACIÓN Y ENVÍO DEL REGISTRO INDIVIDUAL DE PRESTACION DE SERVICIOS DE SALUD – RIPS, COMO SOPORTE DE LA FACTURA ELECTRÓNICA DE VENTA – FEV EN SALUD (4.7.1. FACTURA ELECTRÓNICA DE VENTA)        | SI     |
 | Medios de Pago		     		| MEDPAG   | 40		      | | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.2 Medios de Pago: cbc:PaymentMeansCode)  |SI|
 | Usuario                            		| USUAR    |                   | CHAR(30)       |                                                 | SI     |
 | Clave						| CLAVE    |                   | CHAR(30)       |                                                 | SI     |
