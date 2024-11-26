@@ -191,10 +191,10 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Medios de Pago		     		| MEDPAG   | 40		      | | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.2 Medios de Pago: cbc:PaymentMeansCode)  |SI|
 | Usuario                            		| USUAR    |                   | CHAR(30)       |                                                 | SI     |
 | Clave						| CLAVE    |                   | CHAR(30)       |                                                 | SI     |
-| Indicador de prestación de servicios desde	| INPESD   |                   | varchar(100)	|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
-| Indicador de prestación de servicios hasta	| INPEST   |                   | varchar(100)	| Hora de inicio del periodo de prestación de servicios.                                       | Sí              |
-| Indicador de periodo de la entrega	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                      | Sí              | 
-| Indicador de periodo de entrada		| INPENT   |                   | varchar(100)	| Hora de finalización del periodo de prestación de servicios.                         | Sí              |
+| Fecha de inicio del periodo de prestación de servicios	| INPESD   |                   | varchar(100)	|Fecha de inicio del periodo de prestación de servicios.                                             | Sí              | 
+| Hora de inicio del periodo de prestación de servicios	| INPEST   |                   | varchar(100)	| Hora de inicio del periodo de prestación de servicios.                                       | Sí              |
+| Fecha de finalización del periodo de prestación de servicios	    	| INPEND   |                   | varchar(100)	| Fecha de finalización del periodo de prestación de servicios.                      | Sí              | 
+| Hora de finalización del periodo de prestación de servicios		| INPENT   |                   | varchar(100)	| Hora de finalización del periodo de prestación de servicios.                         | Sí              |
 | Identificador del análisis del recurso	| ANDREID  |                   | Alfanumérico      |  Código único que identifica un análisis del recurso utilizado o entregado.                         |No              |
 | Datos del análisis del recurso		| ANDREDA  |                   | Texto             |  Información específica relacionada con el análisis del recurso.                                     |No              |
 | Fecha del análisis del recurso		| ANDREDT  |                   | Fecha (YYYY-MM-DD)| Fecha en la que se realizó el análisis del recurso.                                                 | No              |
