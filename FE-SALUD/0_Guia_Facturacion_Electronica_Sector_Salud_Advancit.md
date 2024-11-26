@@ -800,7 +800,7 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
       <sendoc xsi:type="ns2:Map">
         <item>
           <key xsi:type="xsd:string">secado</key>
-          <value xsi:type="xsd:string">{JSON DETDOC codificado en BASE64}</value>
+          <value xsi:type="xsd:string">{JSON CABDOC codificado en BASE64}</value>
         </item>
         <item>
           <key xsi:type="xsd:string">secldo</key>
