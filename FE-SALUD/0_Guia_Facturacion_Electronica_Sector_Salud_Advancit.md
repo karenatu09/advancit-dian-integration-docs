@@ -26,7 +26,7 @@ Los datos que se deben enviar en la petición SOAP incluyen las siguientes secci
 - **DETALLEPRO**: Detalle de productos.
 - **DETIMP**: Detalle de impuestos.
 - **ADIDOC**: Información adicional del documento.
-- **DETDES**: Detalle de descuentos.
+- **DESCDOC**: Detalle de descuentos.
 - **DATSAL**: Datos de salud.
 - **PREPAI**: Información sobre el pago previo, que incluye el monto abonado o anticipado por el paciente o aseguradora.
 - **PURSAL**: Datos relacionados con archivos.
@@ -463,7 +463,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 
 
-## Campos de Detalle de Descuento (DETDES)
+## Campos de Detalle de Descuento (DESCDOC)
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
 | Consecutivo de descuento           		| CONDES   |                  | INT(6)          | Número Consecutivo del descuento.                        | SI     |
@@ -476,11 +476,11 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Detalle del descuento asignado B       	| DESSAB   |                  | Texto        	| Descripción específica sobre el descuento tipo B. 	   | No		|
 
 
-##### **Ejemplo de DETDES**
+##### **Ejemplo de DESCDOC**
 
 ```json
 {
-	"DETDES": [
+	"DESCDOC": [
 		{
 			"CONDES": "",
 			"CODDES": "",
@@ -773,7 +773,7 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 | `sedeim`          | `DETIMPDOC`        | Detalle de los impuestos aplicados                   |
 | `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
 | `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
-| `sedecu`          | `DESCDOC`          | Datos de la empresa que emite el documento           |
+| `sedecu`          | `DESCDOC`          | Descuento del Documento				|
 | `datsal`          | `DATSAL`           | Datos Sector Salud					|
 | `seepai`          | `PREPAI`           | Información sobre el pago previo sector salud	|
 | `pursal`          | `PURSAL`           | Datos relacionados con archivos                     	|
