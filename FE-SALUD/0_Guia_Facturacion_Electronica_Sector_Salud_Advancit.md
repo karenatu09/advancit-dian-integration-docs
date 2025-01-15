@@ -7,7 +7,7 @@ La comunicación con el servicio se realiza mediante una petición SOAP que incl
 
 ### **Requisitos previos**
 - **URL del WSDL**: 
-  - **Pruebas**: Permite realizar pruebas infinitas sin repercusión. URL: `[http://pruebas.url.wsdl](https://mff.advancit.co/facturaelectronicav2/ws_electronic_invoice_salud_v2.wsdl)`
+  - **Pruebas**: Permite realizar pruebas infinitas sin repercusión. URL: `https://mff.advancit.co/facturaelectronicav2/ws_electronic_invoice_salud_v2.wsdl`
   - **Producción**: URL para operaciones reales: `por definir`
 - Implementar la seguridad requerida, como certificados digitales si aplica.
 - Uso de la librería SOAP en PHP (u otro lenguaje que soporte SOAP).
