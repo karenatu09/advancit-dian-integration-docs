@@ -105,7 +105,8 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | ID de Registro 		     | REGID   	|  					| CHAR(36) |                                                    | NO     |
 | Registro Nombre                    | REGNAM   |  					| CHAR(36) |                                                    | NO     |
 
-NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
+> [!NOTE]
+>NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta >que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
 
 ##### **Ejemplo de DATOEMP**
 ```json
@@ -209,7 +210,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Monto de preparación				| PREPAM   |                   | Numérico          | Valor monetario asociado al costo de preparación de los bienes o servicios.                        | No              |
 | Descuento por preparación			| PREDRE   |                   | Numérico          | Valor del descuento aplicado al costo de preparación de los bienes o servicios.                    | No              |
 
-NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
+> [!NOTE]
+> NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta
+> que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
 
 ##### **Ejemplo de CABDOC**
 
@@ -312,7 +315,9 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 | Identificador del registro	     | REGID    |                  | Alfanumérico | Código único que identifica el registro del cliente en el sistema. | Sí              |
 | Nombre del registro		     | REGNAM   |                  | Texto        | Nombre o descripción oficial asociada al registro del cliente.      | Sí              |
 
-NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
+> [!NOTE]
+> NOTA: Teniendo en cuenta que el proceso de facturacion electronica ha experimentado multiples modificaciones, se han mantenido algunos campos de versiones anteriores los cuales no se veran reflejados en el xml final de envio, pero teniendo en cuenta
+> que no se han descartado del todo, se mantienen en la presente estructura debido a su posible puesta en marcha en un futuro.
 
 ##### **Ejemplo de CLIDOC**
 
@@ -621,9 +626,10 @@ A continuación, se presenta un ejemplo de cómo estructurar los datos en format
   ]
 }
 ```
-### Notas importantes:
-1. Este JSON debe codificarse en **Base64** antes de ser incluido en el valor correspondiente dentro del XML SOAP.
-2. Todos los campos obligatorios deben estar presentes para garantizar el cumplimiento de las especificaciones.
+> [!IMPORTANT]
+> ### Notas importantes:
+> 1. Este JSON debe codificarse en **Base64** antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+> 2. 2. Todos los campos obligatorios deben estar presentes para garantizar el cumplimiento de las especificaciones.
 
 
 ## Campos de Pago Previo (PREPAI)
@@ -657,10 +663,11 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 
 En esta sección se detalla la estructura para los datos asociados a archivos relevantes dentro del proceso de facturación electrónica en el sector salud. 
 
-### Notas importantes:
-1. Todos los campos de este JSON son **obligatorios** y deben estar correctamente diligenciados.
-2. Los valores deben seguir el formato especificado en la tabla para garantizar su validez.
-3. Este JSON se debe incluir en la solicitud en el formato indicado, codificado en **Base64** antes de su inserción en el XML SOAP.
+> [!IMPORTANT]
+> ### Notas importantes:
+> 1. Todos los campos de este JSON son **obligatorios** y deben estar correctamente diligenciados.
+> 2. Los valores deben seguir el formato especificado en la tabla para garantizar su validez.
+> 3. Este JSON se debe incluir en la solicitud en el formato indicado, codificado en **Base64** antes de su inserción en el XML SOAP.
 
 ### Estructura de los campos:
 
@@ -692,10 +699,11 @@ En esta sección se detalla la estructura para los datos asociados a archivos re
 
 Esta sección describe la estructura de los datos relacionados con archivos adicionales que deben incluirse en los procesos de facturación electrónica para el sector salud.  
 
-### Notas importantes:
-1. Los campos de este JSON son **obligatorios** y deben llenarse de acuerdo con las especificaciones indicadas.
-2. Es fundamental garantizar que todos los valores cumplan con los formatos esperados para evitar errores durante el procesamiento.
-3. Este JSON debe ser codificado en **Base64** antes de su incorporación al XML SOAP.
+> [!IMPORTANT]
+> ### Notas importantes:
+> 1. Los campos de este JSON son **obligatorios** y deben llenarse de acuerdo con las especificaciones indicadas.
+> 2. Es fundamental garantizar que todos los valores cumplan con los formatos esperados para evitar errores durante el procesamiento.
+> 3. Este JSON debe ser codificado en **Base64** antes de su incorporación al XML SOAP.
 
 ### Estructura de los campos:
 
